@@ -12,25 +12,22 @@ const StyledLinks = styled.div`
 font-family:Helvetica, sans-serif;
   .link {
     text-decoration: none;
-    color: #B91414;
-    margin-bottom: 1rem;
-    
+    color: lightgrey;
+    margin: 1rem; 
+    flex-basis: fit-content;
+    flex-shrink: 3;
   }
   .App-header {
     background-color: #3D434A;
-    min-height: 12vh;
+    min-height: 8vh;
     font-size: calc(10px + 2vmin);
-    color: #A45D17;
 }
   .menu {
     display: flex;
     margin-right: 10%;
-    margin-left: 10%;
-    justify-content: space-evenly;
+    justify-content: flex-start;
   }
   h1 {
-    text-align: center;
-    margin-bottom: 1rem;
     padding: 1rem;
   }
 `;
@@ -45,8 +42,8 @@ function App() {
     <div className="App">
       <StyledLinks>
         <header className="App-header">
-          <h1>🏋️‍♀️ ANYWERE FITNESS 🏋️‍♀️</h1>
           <div className="ui  menu" >
+          <h1>🏋️‍♀️ ANYWERE FITNESS 🏋️‍♀️</h1>
             <a className="item link">
               <Link className="link" to="/dashboard">Dashboard</Link>
             </a>
