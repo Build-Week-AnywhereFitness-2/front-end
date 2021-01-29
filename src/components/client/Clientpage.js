@@ -7,9 +7,6 @@ function Clientpage (props) {
 
     const [state, dispatch] = useReducer(reducers, initialState)
 
-    // useEffect(() => {
-    //     props.getTrainerClasses();
-    // }, [getTrainerClasses])
 
     return (
         <div>
