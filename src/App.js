@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>🏋️‍♀️ ANYWERE FITNESS 🏋️‍♀️</h1>
+        <h1>🏋️‍♀️ ANYWHERE FITNESS 🏋️‍♀️</h1>
       </header>
       <Route>
         <div>
@@ -26,7 +26,10 @@ function App() {
               <Link to="/client">Clients</Link>
             </li>
             <li>
-              <Link to="/login">Login</Link>
+              <Link to="/Trainerlogin">Trainer Login</Link>
+            </li>
+            <li>
+              <Link to="/Clientlogin">Client Login</Link>
             </li>
             <li>
               <Link onClick={logout}>Logout</Link>
@@ -37,9 +40,9 @@ function App() {
 
             {/* Private Route instead of route? */}
             <Route exact path="/dashboard" component={"dashboard placeholder"} />
-            <PrivateRoute exact path="/trainerpage">
+            <Route exact path="/trainerpage">
               <TrainerPage  />
-            </PrivateRoute>
+            </Route>
           </Switch>
         </div>
       </Route>

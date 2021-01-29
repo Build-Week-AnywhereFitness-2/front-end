@@ -17,8 +17,20 @@ import {
 
 } from "../actions/index"
 
-const initialState = {
-    classes: [],
+export const initialState = {
+    classes: [
+        {
+        name: "eric",
+        type:"jazz",
+        start:"12:30 pm",
+        duration:"30 minutes",
+        intensity:"intermediate",
+        location:"town hall",
+        registered: "25",
+        max: "100",
+        error:""
+        }
+    ],
     user: {},
     fetching: false,
     error: ""
