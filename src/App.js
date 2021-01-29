@@ -5,6 +5,7 @@ import TrainerPage from "./components/trainer/Trainerpage"
 import "./App.css";
 import { useState } from 'react';
 import styled from "styled-components";
+import ClientPage from './components/client/Clientpage';
 
 
 
@@ -51,7 +52,7 @@ function App() {
               <Link className="link" to="/trainerpage">Trainers</Link>
             </a>
             <a className="link item">
-              <Link className="link" to="/client">Clients</Link>
+              <Link className="link" to="/clientpage">Clients</Link>
             </a>
             <a className="link item">
               <Link className="link" to="/Trainerlogin">Trainer Login</Link>
@@ -73,6 +74,9 @@ function App() {
           <Route exact path="/dashboard" component={"dashboard placeholder"} />
           <PrivateRoute exact path="/trainerpage">
             <TrainerPage />
+          </PrivateRoute>
+          <PrivateRoute exact path="/clientpage">
+            <ClientPage />
           </PrivateRoute>
         </Switch>
 

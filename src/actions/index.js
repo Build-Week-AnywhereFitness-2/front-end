@@ -56,3 +56,18 @@ export const deleteTrainerClass = (id) => dispatch => {
         dispatch ({ type: DELETE_CLASS_FAILURE, payload: err})
     })
 }
+
+export const getClientClasses = () => dispatch => {
+    
+    dispatch({ type: FETCH_CLASS_START })
+
+    axiosWithAuth().get("")
+    .then(res => {
+
+        dispatch({ type: FETCH_CLASS_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+        dispatch ({ type: FETCH_CLASS_FAILURE, payload: err })
+    })
+
+}
