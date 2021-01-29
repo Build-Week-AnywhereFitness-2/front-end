@@ -43,7 +43,7 @@ function App() {
       <StyledLinks>
         <header className="App-header">
           <div className="ui  menu" >
-          <h1>🏋️‍♀️ ANYWERE FITNESS 🏋️‍♀️</h1>
+          <h1>🏋️‍♀️ ANYWHERE FITNESS 🏋️‍♀️</h1>
             <a className="item link">
               <Link className="link" to="/dashboard">Dashboard</Link>
             </a>
@@ -54,7 +54,10 @@ function App() {
               <Link className="link" to="/client">Clients</Link>
             </a>
             <a className="link item">
-              <Link className="link" to="/login">Login</Link>
+              <Link className="link" to="/Trainerlogin">Trainer Login</Link>
+            </a>
+            <a className="link item">
+              <Link className="link" to="/Clientlogin">Client Login</Link>
             </a>
             {// ternary statement renders logout button only while logged in 
               (loginStatus)
