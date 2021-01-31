@@ -2,6 +2,7 @@ import './App.css';
 import { Route, Switch, Link } from "react-router-dom"
 import { PrivateRoute } from './components/PrivateRoute';
 import TrainerPage from "./components/trainer/Trainerpage"
+import TrainerLogin from "./components/trainer/TrainerLogin"
 
 function App() {
 
@@ -26,17 +27,17 @@ function App() {
               <Link to="/client">Clients</Link>
             </li>
             <li>
-              <Link to="/Trainerlogin">Trainer Login</Link>
+              <Link to="/trainerlogin">Trainer Login</Link>
             </li>
             <li>
-              <Link to="/Clientlogin">Client Login</Link>
+              <Link to="/clientlogin">Client Login</Link>
             </li>
             <li>
               <Link onClick={logout}>Logout</Link>
             </li>
           </ul>
           <Switch>
-            <Route exact path="/login" component={"login placeholder"} />
+            <Route exact path="/trainerlogin" component={TrainerLogin} />
 
             {/* Private Route instead of route? */}
             <Route exact path="/dashboard" component={"dashboard placeholder"} />
