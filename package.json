@@ -6,6 +6,10 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+<<<<<<< HEAD
+=======
+    "@types/react-router-dom": "^5.1.7",
+>>>>>>> ebe0040f9f90e3645b7315857685afa2981eecfc
     "axios": "^0.21.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -15,6 +19,10 @@
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+<<<<<<< HEAD
+=======
+    "styled-components": "^5.2.1",
+>>>>>>> ebe0040f9f90e3645b7315857685afa2981eecfc
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -40,5 +48,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "babel-plugin-styled-components": "^1.12.0",
+    "jest-styled-components": "^7.0.3"
   }
 }

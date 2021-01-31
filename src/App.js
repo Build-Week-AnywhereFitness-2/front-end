@@ -1,52 +1,87 @@
 import './App.css';
 import { Route, Switch, Link } from "react-router-dom"
-import { PrivateRoute } from './components/PrivateRoute';
+import { PrivateRoute } from './utils/PrivateRoute';
 import TrainerPage from "./components/trainer/Trainerpage"
-import TrainerLogin from "./components/trainer/TrainerLogin"
+import "./App.css";
+import { useState } from 'react';
+import styled from "styled-components";
+import ClientPage from './components/client/Clientpage';
+
+
+
+const StyledLinks = styled.div`
+font-family:Helvetica, sans-serif;
+  .link {
+    text-decoration: none;
+    color: lightgrey;
+    margin: 1rem; 
+    flex-basis: fit-content;
+    flex-shrink: 3;
+  }
+  .App-header {
+    background-color: #3D434A;
+    min-height: 8vh;
+    font-size: calc(10px + 2vmin);
+}
+  .menu {
+    display: flex;
+    margin-right: 10%;
+    justify-content: flex-start;
+  }
+  h1 {
+    padding: 1rem;
+  }
+`;
 
 function App() {
-
-  const logout =() => {
+  const [loginStatus, setLoginStatus] = useState(false);
+  const logout = () => {
     localStorage.removeItem("token")
-  }
+    setLoginStatus(false);
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>🏋️‍♀️ ANYWHERE FITNESS 🏋️‍♀️</h1>
-      </header>
-      <Route>
-        <div>
-          <ul>
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/trainerpage">Trainers</Link>
-            </li>
-            <li>
-              <Link to="/client">Clients</Link>
-            </li>
-            <li>
-              <Link to="/trainerlogin">Trainer Login</Link>
-            </li>
-            <li>
-              <Link to="/clientlogin">Client Login</Link>
-            </li>
-            <li>
-              <Link onClick={logout}>Logout</Link>
-            </li>
-          </ul>
-          <Switch>
-            <Route exact path="/trainerlogin" component={TrainerLogin} />
+      <StyledLinks>
+        <header className="App-header">
+          <div className="ui  menu" >
+          <h1>🏋️‍♀️ ANYWHERE FITNESS 🏋️‍♀️</h1>
+            <a className="item link">
+              <Link className="link" to="/dashboard">Dashboard</Link>
+            </a>
+            <a className="link item">
+              <Link className="link" to="/trainerpage">Trainers</Link>
+            </a>
+            <a className="link item">
+              <Link className="link" to="/clientpage">Clients</Link>
+            </a>
+            <a className="link item">
+              <Link className="link" to="/Trainerlogin">Trainer Login</Link>
+            </a>
+            <a className="link item">
+              <Link className="link" to="/Clientlogin">Client Login</Link>
+            </a>
+            {// ternary statement renders logout button only while logged in 
+              (loginStatus)
+                ? <a className="link item"> <Link onClick={logout}>Logout</Link> </a>
+                : <></>
+            }
+          </div>
+        </header>
+        <Switch>
+          <Route exact path="/login" component={"login placeholder"} />
 
-            {/* Private Route instead of route? */}
-            <Route exact path="/dashboard" component={"dashboard placeholder"} />
-            <Route exact path="/trainerpage">
-              <TrainerPage  />
-            </Route>
-          </Switch>
-        </div>
-      </Route>
+          {/* Private Route instead of route? */}
+          <Route exact path="/dashboard" component={"dashboard placeholder"} />
+          <PrivateRoute exact path="/trainerpage">
+            <TrainerPage />
+          </PrivateRoute>
+          <PrivateRoute exact path="/clientpage">
+            <ClientPage />
+          </PrivateRoute>
+        </Switch>
+
+
+      </StyledLinks>
     </div>
   );
 }

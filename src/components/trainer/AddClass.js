@@ -27,7 +27,6 @@ const AddClass = (props) => {
         };
         props.postTrainerClasses(newClass)
         setClassValues(initialClassData)
-        
     }
 
     function handleChange (e) {
@@ -107,9 +106,9 @@ const AddClass = (props) => {
                     value={classValues.max}
                     placeholder="Max Class Size"
                     />
-                    
+
                 </div>
-                
+
                 <button type="submit">Add Class</button>
 
             </form>
@@ -126,4 +125,4 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {postTrainerClasses}
 
-export default connect(mapStateToProps,mapDispatchToProps)(AddClass)
+export default connect(mapStateToProps,mapDispatchToProps)(AddClass) 

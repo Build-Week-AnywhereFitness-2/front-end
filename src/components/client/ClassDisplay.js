@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { connect } from "react-redux"
-import { getTrainerClasses } from "../../actions/index" 
+import { getClientClasses } from "../../actions/index" 
 import ClassCard from "./ClassCard"
 
 const ClassDisplay = (props) => {
@@ -22,4 +22,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {getTrainerClasses})(ClassDisplay)
+export default connect(mapStateToProps, {getClientClasses})(ClassDisplay)
