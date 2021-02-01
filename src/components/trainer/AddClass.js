@@ -1,8 +1,72 @@
 import React, { useState } from "react"
 import { connect } from "react-redux"
 import { postTrainerClasses } from "../../actions/index"
+import styled from "styled-components";
 
 
+
+const AddClassCardStyle = styled.div`
+
+font-family:Helvetica, sans-serif;
+
+.classes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #3D434A;
+    color: lightgrey;
+    margin:0 20%;
+    height: 100%;
+
+    
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.form_inputs{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+input {
+    width: 40%;
+    padding: 5px 10px;
+    margin: 0.5% 10px;
+    box-sizing: border-box;
+    text-align: center;
+
+  }
+
+button{
+    background-color: #008CBA; /* Blue */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5rem;
+}
+
+
+h2{
+    color: white;
+    font-size: 2.5rem;
+    margin: 2% 0;
+    text-decoration: underline;
+    
+}
+
+
+
+`
 
 const AddClass = (props) => {
 
@@ -37,12 +101,14 @@ const AddClass = (props) => {
     }
 
     return (
+        <AddClassCardStyle>
         <div>
-            <div>
-                <h2>Add Class</h2>
-            </div>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <div className="classes">
+                <h2>Add A Class</h2>
+            
+            <br/>
+            <form  onSubmit={handleSubmit}>
+                <div className="form_inputs">
                     <input
                     onChange={handleChange}
                     name="name"
@@ -50,6 +116,7 @@ const AddClass = (props) => {
                     value={classValues.name}
                     placeholder="Name"
                     />
+                    <br/>
 
                     <input
                     onChange={handleChange}
@@ -58,6 +125,7 @@ const AddClass = (props) => {
                     value={classValues.type}
                     placeholder="Type"
                     />
+                    <br/>
 
                     <input
                     onChange={handleChange}
@@ -66,6 +134,7 @@ const AddClass = (props) => {
                     value={classValues.start}
                     placeholder="Start Time"
                     />
+                    <br/>
 
                     <input
                     onChange={handleChange}
@@ -74,6 +143,7 @@ const AddClass = (props) => {
                     value={classValues.duration}
                     placeholder="Duration"
                     />
+                    <br/>
 
                     <input
                     onChange={handleChange}
@@ -82,6 +152,7 @@ const AddClass = (props) => {
                     value={classValues.intensity}
                     placeholder="Intensity Level"
                     />
+                    <br/>
 
                     <input
                     onChange={handleChange}
@@ -90,6 +161,7 @@ const AddClass = (props) => {
                     value={classValues.location}
                     placeholder="Location"
                     />
+                    <br/>
 
                     <input
                     onChange={handleChange}
@@ -98,6 +170,7 @@ const AddClass = (props) => {
                     value={classValues.registered}
                     placeholder="Number Registered"
                     />
+                    <br/>
 
                     <input
                     onChange={handleChange}
@@ -106,14 +179,18 @@ const AddClass = (props) => {
                     value={classValues.max}
                     placeholder="Max Class Size"
                     />
+                    <br/>
 
                 </div>
+                <br/>
 
                 <button type="submit">Add Class</button>
 
             </form>
+            </div>
 
         </div>
+        </AddClassCardStyle>
     )
 }
 
