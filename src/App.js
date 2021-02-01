@@ -9,7 +9,7 @@ import ClientPage from './components/client/Clientpage';
 
 
 
-const StyledLinks = styled.div`
+ export const StyledLinks = styled.div`
 font-family:Helvetica, sans-serif;
   .link {
     text-decoration: none;
@@ -72,9 +72,9 @@ function App() {
 
           {/* Private Route instead of route? */}
           <Route exact path="/dashboard" component={"dashboard placeholder"} />
-          <PrivateRoute exact path="/trainerpage">
+          <Route exact path="/trainerpage">
             <TrainerPage />
-          </PrivateRoute>
+          </Route>
           <PrivateRoute exact path="/clientpage">
             <ClientPage />
           </PrivateRoute>

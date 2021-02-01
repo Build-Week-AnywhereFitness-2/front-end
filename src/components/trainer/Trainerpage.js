@@ -3,6 +3,18 @@ import  reducers,{ initialState } from "../../reducers/index"
 import AddClass from "./AddClass"
 import { getTrainerClasses } from "../../actions/index"
 import ClassDisplay from "./ClassDisplay"
+import styled from "styled-components";
+
+const TrainerPageStyle = styled.div `
+
+.trainer_main{
+    font-size: 5rem;
+    text-align: center;
+    text-decoration: underline;
+    margin: 3% 0;
+}
+
+`
 
 function TrainerPage (props) {
 
@@ -13,15 +25,20 @@ function TrainerPage (props) {
     // }, [getTrainerClasses])
 
     return (
+        <TrainerPageStyle>
+        <div className="trainer_main">
+            <h1>Your Classes</h1>
+        </div>
         <div>
-            <h2>Classes Database</h2>
         <main>
-            
-            <ClassDisplay dispatch={dispatch} data={state}/>
-            <br/>
             <AddClass dispatch={dispatch} />
+            <br/>
+            <ClassDisplay dispatch={dispatch} data={state}/>
+            
+            
         </main>
         </div>
+        </TrainerPageStyle>
         
     )
 }

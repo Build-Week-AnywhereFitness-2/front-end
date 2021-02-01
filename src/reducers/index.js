@@ -20,14 +20,14 @@ import {
 export const initialState = {
     classes: [
         {
-        name: "eric",
-        type:"jazz",
-        start:"12:30 pm",
-        duration:"30 minutes",
-        intensity:"intermediate",
-        location:"town hall",
-        registered: "25",
-        max: "100",
+        name: "",
+        type:"",
+        start:"",
+        duration:"",
+        intensity:"",
+        location:"",
+        registered: "",
+        max: "",
         error:""
         }
     ],
