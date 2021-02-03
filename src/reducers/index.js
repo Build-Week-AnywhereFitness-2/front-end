@@ -22,12 +22,12 @@ export const initialState = {
         {
         name: "",
         type:"",
-        start:"",
-        duration:"",
-        intensity:"",
+        start_time:"",
+        durationHr:"",
+        intensity_level:"",
         location:"",
-        registered: "",
-        max: "",
+        attendees_amt: "",
+        max_class_size: "",
         error:""
         }
     ],

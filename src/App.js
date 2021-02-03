@@ -6,7 +6,8 @@ import "./App.css";
 import { useState } from 'react';
 import styled from "styled-components";
 import ClientPage from './components/client/Clientpage';
-
+import Signup from "./components/Signup"
+import UpdateClass from "./components/trainer/UpdateClass"
 
 
  export const StyledLinks = styled.div`
@@ -55,10 +56,10 @@ function App() {
               <Link className="link" to="/clientpage">Clients</Link>
             </a>
             <a className="link item">
-              <Link className="link" to="/Trainerlogin">Trainer Login</Link>
+              <Link className="link" to="/signup">Signup</Link>
             </a>
             <a className="link item">
-              <Link className="link" to="/Clientlogin">Client Login</Link>
+              <Link className="link" to="/dashboard">Login</Link>
             </a>
             {// ternary statement renders logout button only while logged in 
               (loginStatus)
@@ -68,10 +69,13 @@ function App() {
           </div>
         </header>
         <Switch>
-          <Route exact path="/login" component={"login placeholder"} />
+          <Route exact path="/signup" component={Signup} />
+          <Route exact path="/updateclass" component={UpdateClass} />
 
           {/* Private Route instead of route? */}
-          <Route exact path="/dashboard" component={"dashboard placeholder"} />
+          <PrivateRoute exact path="/dashboard">
+            {/* <Dashboard/> */}
+            </PrivateRoute>
           <Route exact path="/trainerpage">
             <TrainerPage />
           </Route>

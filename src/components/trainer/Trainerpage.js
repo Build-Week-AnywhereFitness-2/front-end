@@ -4,6 +4,8 @@ import AddClass from "./AddClass"
 import { getTrainerClasses } from "../../actions/index"
 import ClassDisplay from "./ClassDisplay"
 import styled from "styled-components";
+import UpdateClass from "./UpdateClass"
+import { deleteTrainerClass } from "../../actions/index"
 
 const TrainerPageStyle = styled.div `
 
@@ -23,6 +25,10 @@ function TrainerPage (props) {
     // useEffect(() => {
     //     props.getTrainerClasses();
     // }, [getTrainerClasses])
+    function onClickDeleteTrainerClass(id) {
+        props.deleteTrainerClass(id);
+    };
+
 
     return (
         <TrainerPageStyle>
@@ -32,8 +38,9 @@ function TrainerPage (props) {
         <div>
         <main>
             <AddClass dispatch={dispatch} />
+            
             <br/>
-            <ClassDisplay dispatch={dispatch} data={state}/>
+            <ClassDisplay dispatch={dispatch} data={state} delClass={onClickDeleteTrainerClass}/>
             
             
         </main>

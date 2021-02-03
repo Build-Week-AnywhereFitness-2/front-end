@@ -1,11 +1,9 @@
-import React, { useState } from "react"
-import { connect } from "react-redux"
-import { postTrainerClasses } from "../../actions/index"
+import axios from "axios";
+import React, {useState, useEffect} from "react"
+import { useParams, useHistory } from "react-router-dom";
 import styled from "styled-components";
 
-
-
-const AddClassCardStyle = styled.div`
+const UpdateClassCardStyle = styled.div`
 
 font-family:Helvetica, sans-serif;
 
@@ -15,7 +13,7 @@ font-family:Helvetica, sans-serif;
     align-items: center;
     background-color: #3D434A;
     color: lightgrey;
-    margin:0 20%;
+    margin:5% 20%;
     height: 100%;
 
     
@@ -67,8 +65,8 @@ h2{
 
 
 `
-
-const AddClass = (props) => {
+const UpdateClass = (props) => {
+    console.log(props)
 
     const initialClassData = {
         name: "",
@@ -82,34 +80,53 @@ const AddClass = (props) => {
         error:""
     }
 
+    const { push } = useHistory();
+    const { id } = useParams();
+
     const [classValues, setClassValues] = useState(initialClassData)
 
-    function handleSubmit (e) {
-        e.preventDefault();
-        const newClass = {
-            ...classValues
-        };
-        props.postTrainerClasses(newClass)
-        setClassValues(initialClassData)
-    }
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/movies/${id}`)
+        .then((res) => {
+            console.log(res.data)
+            setClassValues(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }, [id, props.classes])
 
-    function handleChange (e) {
+    const handleChange = e => {
+        e.persist();
+        
         setClassValues({
             ...classValues,
             [e.target.name]: e.target.value
         })
     }
 
+    const handleSubmit = e => {
+        e.preventDefault();
+        
+        axios.put(`http://localhost:5000/api/movies/${id}`, classValues)
+        .then((res) => {
+            console.log(res.data)
+            props.setClassValues(res.data);
+            push("/")
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
+    
     return (
-        <AddClassCardStyle>
-        <div>
-            <div className="classes">
-                <h2>Add A Class</h2>
+        <UpdateClassCardStyle>
+        <div className="classes">
             
-            <br/>
-            <form  onSubmit={handleSubmit}>
+            <h2>UPDATE CLASS</h2>
+            <form onSubmit={handleSubmit}>
                 <div className="form_inputs">
-                    <input
+            <input
                     onChange={handleChange}
                     name="name"
                     id="name"
@@ -186,26 +203,16 @@ const AddClass = (props) => {
                     placeholder="Max Class Size"
                     />
                     <br/>
-
                 </div>
-                <br/>
-
-                <button type="submit">Add Class</button>
+                
+                <button type="submit">Update</button>
+                
+                
 
             </form>
-            </div>
-
         </div>
-        </AddClassCardStyle>
+        </UpdateClassCardStyle>
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        classes: state.classes
-    }
-}
-
-const mapDispatchToProps = {postTrainerClasses}
-
-export default connect(mapStateToProps,mapDispatchToProps)(AddClass) 
+export default UpdateClass
