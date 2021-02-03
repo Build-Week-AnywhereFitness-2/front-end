@@ -72,7 +72,8 @@ export default function Signup() {
           dob: '',
           pw: ''
       }).then(response => {
-          console.log(response)
+        setFormData(response.data)
+          console.log(response.data)
       })
     }
     
