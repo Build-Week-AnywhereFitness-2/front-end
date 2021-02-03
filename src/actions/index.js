@@ -16,11 +16,11 @@ export const DELETE_CLASS_START = "DELETE_CLASS_START"
 export const DELETE_CLASS_SUCCESS = "DELETE_CLASS_SUCCESS"
 export const DELETE_CLASS_FAILURE = "DELETE_CLASS_FAILURE"
 
-export const getTrainerClasses = () => dispatch => {
+export const getTrainerClasses = (id) => dispatch => {
     
     dispatch({ type: FETCH_CLASS_START })
 
-    axiosWithAuth().get("/api/classes")
+    axiosWithAuth().get(`/api/user/${id}/instructors-classes`)
     .then(res => {
 
         dispatch({ type: FETCH_CLASS_SUCCESS, payload: res.data })
@@ -35,7 +35,7 @@ export const postTrainerClasses = (cls, id) => dispatch => {
 
     dispatch ({ type: POST_CLASS_START })
 
-    axiosWithAuth().post(`/api/classes/${id}`, {name: cls.name, type: cls.type, start_time: cls.start, durationHr: cls.duration, intensity_level: cls.intensity, location: cls.location, attendees_amt: cls.registered, max_class_size: cls.max})
+    axiosWithAuth().post(`/api/classes/${id}/instructors-classes`, {name: cls.name, type: cls.type, start_time: cls.start, durationHr: cls.duration, intensity_level: cls.intensity, location: cls.location, attendees_amt: cls.registered, max_class_size: cls.max})
     .then(res => {
         dispatch ({ type: POST_CLASS_SUCCESS, payload: res.data })
     })
@@ -48,7 +48,7 @@ export const putTrainerClasses = (cls, id) => dispatch => {
 
     dispatch ({ type: PUT_CLASS_START })
 
-    axiosWithAuth().put(`/api/classes/${id}`, {name: cls.name, type: cls.type, start_time: cls.start, durationHr: cls.duration, intensity_level: cls.intensity, location: cls.location, attendees_amt: cls.registered, max_class_size: cls.max})
+    axiosWithAuth().put(`/api/classes/${id}/instructors-classes`, {name: cls.name, type: cls.type, start_time: cls.start, durationHr: cls.duration, intensity_level: cls.intensity, location: cls.location, attendees_amt: cls.registered, max_class_size: cls.max})
     .then(res => {
         dispatch ({ type: PUT_CLASS_SUCCESS, payload: res.data })
     })
@@ -61,7 +61,7 @@ export const deleteTrainerClass = (id) => dispatch => {
 
     dispatch ({ type: DELETE_CLASS_START })
 
-    axiosWithAuth().get(`/api/classes/${id}`)
+    axiosWithAuth().get(`/api/classes/${id}/instructors-classes`)
     .then(res => {
         dispatch({ type: DELETE_CLASS_SUCCESS, payload: id })
     })

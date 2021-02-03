@@ -24,7 +24,7 @@ class TrainerLogin extends React.Component {
     login = e => {
         e.preventDefault();
         axiosWithAuth()
-        .post("", this.state.trainerInfo)
+        .post("https://anywherefitness2.herokuapp.com/api/auth/login", this.state.trainerInfo)
         .then(res => {
             console.log(res)
             localStorage.setItem("token", res.data.payload)
@@ -67,4 +67,3 @@ class TrainerLogin extends React.Component {
 }
 
 export default TrainerLogin
-
