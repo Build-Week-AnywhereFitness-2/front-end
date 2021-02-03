@@ -2,32 +2,32 @@ import React, { useState } from 'react'
 import '../App.css'
 import * as yup from 'yup'
 import axios from 'axios'
+import {useHistory} from "react-router-dom"
 
 
 
 const formSchema = yup.object().shape({
-    fname: yup.string().required('Must Include First Name'),
-    lname: yup.string().required('Must Include Last Name'),
-    email: yup.string().email().required('Must Include A Valid Email'),
-    dob: yup.date().required('Must Include A Valid Date Of Birth'),
-    pw: yup.string().required('Must Include A Valid Password')
+    full_name: yup.string().required('Must Include Full Name'),
+    // lname: yup.string().required('Must Include Last Name'),
+    // email: yup.string().email().required('Must Include A Valid Email'),
+    username: yup.date().required('Must Include Username'),
+    password: yup.string().required('Must Include A Valid Password')
 })
 
 export default function Signup() {
+    const { push } = useHistory();
     const [form, setFormData] = useState({
-        fname: '',
-        lname: '',
-        email: '',
-        dob: '',
-        pw: ''
+        username: "",
+        password:"",
+        full_name:"",
+        signup_code:"",
     })
 
     const [formError, setFormError] = useState({
-        fname: '',
-        lname: '',
-        email: '',
-        dob: '',
-        pw: ''
+        username: "",
+        password:"",
+        full_name:"",
+        signup_code:"",
 
     })
 
@@ -46,17 +46,17 @@ export default function Signup() {
         })
     }
 
-    axios.post('/signup', {
-        fname: '',
-        lname: '',
-        email: '',
-        dob: '',
-        pw: ''
-    }).then(response => {
-        console.log(response)
-    })
+    // axios.post('/https://anywherefitness2.herokuapp.com/', {
+    //     username: "",
+    //     password:"",
+    //     full_name:"",
+    //     signup_code:"",
+    // }).then(response => {
+    //     console.log(response)
+    // })
 
     const changeHandler = (e) => {
+        e.persist();
         setFormData({
             ...form,
             [e.target.name]: e.target.value
@@ -65,43 +65,40 @@ export default function Signup() {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        axios.post('/signup', {
-          fname: '',
-          lname: '',
-          email: '',
-          dob: '',
-          pw: ''
-      }).then(response => {
-        setFormData(response.data)
-          console.log(response.data)
+        axios.post('https://anywherefitness2.herokuapp.com/api/auth/register', form)
+        .then(response => {
+            localStorage.setItem('token', response.data.token);
+            
+            setFormData(response.data)
+            console.log(response.data)
+            push('/')
+      })
+      .catch(err => {
+          console.log(err)
       })
     }
     
     return (
         <div className='form-signup'> 
             <h1 className='signup-h1'>Sign Up</h1>
-            <form>
-             <label htmlFor='fname'><strong>First Name: </strong></label><br />
-             <input type='name' id='fname' name='fname' onChange={changeHandler} />
+            <form onSubmit={submitHandler}>
+             <label htmlFor='username'><strong>Username </strong></label><br />
+             <input type='text' id='username' name='username' onChange={changeHandler} />
              <br />
              <br />
-             <label htmlFor='lname'><strong>Last Name: </strong> </label><br />
-             <input type='name' id='lname' name='lname' onChange={changeHandler} />
-             <br />
-             <br /> 
-             <label htmlFor='email'><strong>Email:</strong></label><br />
-             <input type='email' id='email' name='email' onChange={changeHandler} />
-             <br />
-             <br /> 
-             <label htmlFor='dob'><strong>Date of birth: </strong></label><br />
-             <input type='date' id='dob' name='dob' onChange={changeHandler} />
-             <br />
-             <br /> 
-             <label htmlFor='pw'><strong>Password: </strong></label><br />
-             <input type='password' id='pw' name='pw' onChange={changeHandler}/>
+             <label htmlFor='password'><strong>Password: </strong></label><br />
+             <input type='text' id='password' name='password' onChange={changeHandler}/>
              <br />
              <br />
-             <input type='submit' onSubmit={submitHandler} />
+             <label htmlFor='full_name'><strong>Full Name: </strong></label><br />
+             <input type='text' id='full_name' name='full_name' onChange={changeHandler} />
+             <br />
+             <br />
+             <label htmlFor='signup_code'><strong>Signup Code </strong></label><br />
+             <input type='text' id='signup_code' name='signup_code' onChange={changeHandler} />
+             <br />
+             <br />
+             <button type='submit' onSubmit={submitHandler}>Submit</button>
             </form>
         </div>
     )

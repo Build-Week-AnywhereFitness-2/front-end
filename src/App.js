@@ -12,6 +12,7 @@ import TrainerPage from "./components/trainer/Trainerpage"
 // PAGES (a collection of components that make up one view) //
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Signup from "./components/Signup"
 
 
 export const StyledLinks = styled.div`
@@ -73,8 +74,9 @@ function App() {
       {/* Render the pages here */}
       <div className="view-container">
         <Switch>
+          <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/" component={Dashboard} />
+          <Route exact path="/" component={Dashboard} />
           <PrivateRoute exact path="/trainerpage" component={TrainerPage} />
           <PrivateRoute exact path="/clientpage" component={ClientPage} />
         </Switch>
