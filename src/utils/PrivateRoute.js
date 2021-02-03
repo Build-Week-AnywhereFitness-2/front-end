@@ -1,18 +1,15 @@
 import React from "react"
 import { Route, Redirect } from "react-router-dom"
+import fetchToken from './fetchToken';
 
 export function PrivateRoute(props) {
-    const { children, ...rest } = props;
+    const { component: Component, ...rest } = props;
     return (
         <Route
-        {...rest}
-        render={({ location }) => {
-            return localStorage.getItem("token") ? (
-                children
-            ) : (
-                <Redirect to={{ pathname: "/", state: { from : location }}}/>
-            )
-        }}
+            {...rest}
+            render={(props) => (
+                fetchToken() ? <Component {...props} /> : <Redirect to="/login" />
+            )}
         />
     )
 }
