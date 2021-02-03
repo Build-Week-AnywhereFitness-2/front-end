@@ -5,14 +5,13 @@ import { useState } from 'react';
 import fetchToken from './utils/fetchToken';
 
 import styled from "styled-components";
-
-import ClientPage from './components/client/Clientpage';
-import TrainerPage from "./components/trainer/Trainerpage"
-
+import Dashboard from './components/Dashboard'
+import ClientPage from './components/client/ClientPage';
+import TrainerPage from "./components/trainer/TrainerPage";
+import React from 'react';
 // PAGES (a collection of components that make up one view) //
 import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import Signup from "./components/Signup"
+import Signup from "./components/Signup";
 
 
 export const StyledLinks = styled.div`
@@ -68,9 +67,11 @@ function App() {
               </a>
             </div>
           </header>
+          <div>
+          </div>
         </StyledLinks>
       }
-
+      
       {/* Render the pages here */}
       <div className="view-container">
         <Switch>
