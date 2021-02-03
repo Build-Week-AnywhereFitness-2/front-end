@@ -1,5 +1,6 @@
 # front-end
 FE - Unit 2 &amp; 3
+Deployed URL: https://anywherefitness2app.herokuapp.com/
 
 ## ☝️ **Pitch**
 
