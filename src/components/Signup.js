@@ -64,7 +64,16 @@ export default function Signup() {
     }
 
     const submitHandler = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        axios.post('/signup', {
+          fname: '',
+          lname: '',
+          email: '',
+          dob: '',
+          pw: ''
+      }).then(response => {
+          console.log(response)
+      })
     }
     
     return (
