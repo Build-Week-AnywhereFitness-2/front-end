@@ -18,42 +18,23 @@ export const DELETE_CLASS_SUCCESS = "DELETE_CLASS_SUCCESS"
 export const DELETE_CLASS_FAILURE = "DELETE_CLASS_FAILURE"
 
 export const getTrainerClasses = (id) => dispatch => {
-
-    // const userID = ""
-
-    // const getUserID = user => {
-    //     const token = localStorage.getItem("token")
-
-    //     axiosWithAuth().get("https://anywherefitness2.herokuapp.com/api/auth/whoami",
-    //     {headers: {Authorization: token}})
-    //     .then(res => {
-    //         userID = res.data.id
-
-    //     })
-
-    // }
-    
-    
     dispatch({ type: FETCH_CLASS_START })
-    
 
-    axiosWithAuth().get(`/api/user/6/instructors-classes`)
-    .then(res => {
-
-        dispatch({ type: FETCH_CLASS_SUCCESS, payload: res.data })
-    })
-    .catch(err => {
-        dispatch ({ type: FETCH_CLASS_FAILURE, payload: err.response.data.message })
-    })
+    axiosWithAuth().get(`/api/users/1/instructors-classes`)
+        .then(res => {
+            dispatch({ type: FETCH_CLASS_SUCCESS, payload: res.data })
+        })
+        .catch(err => {
+            dispatch ({ type: FETCH_CLASS_FAILURE, payload: err.response.data.message })
+        })
 
 }
 
 export const postTrainerClasses = (cls) => (dispatch) => {
-    
     dispatch({ type: POST_CLASS_START });
-    axiosWithAuth().post('/api/classes',
-    {
-        name: cls.name, 
+
+    axiosWithAuth().post('/api/classes', {
+        name: cls.name,
         type: cls.type, 
         start_time: cls.start_time, 
         duration_hour: cls.duration_hour, 
