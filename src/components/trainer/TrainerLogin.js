@@ -1,78 +1,64 @@
 import React, { useState } from 'react'
 import * as yup from 'yup'
+import schema from '../../schema/loginSchema';
 import axios from 'axios'
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom"
 
 
 
-const formSchema = yup.object().shape({
-    full_name: yup.string().required('Must Include Full Name'),
-    // lname: yup.string().required('Must Include Last Name'),
-    // email: yup.string().email().required('Must Include A Valid Email'),
-    username: yup.date().required('Must Include Username'),
-    password: yup.string().required('Must Include A Valid Password')
-})
+const initialFormValues = {
+    username: "",
+    password: ""
+}
 
 export default function Login() {
     const { push } = useHistory();
-    const [form, setFormData] = useState({
-        username: "",
-        password:"",
+    const [form, setFormData] = useState(initialFormValues);
 
-    })
+    const [formError, setFormError] = useState(initialFormValues);
 
-    const [formError, setFormError] = useState({
-        username: "",
-        password:"",
-
-
-    })
-
-    const validation = (e) => {
+    const validate = (name, value) => {
         yup
-        .reach(formSchema, e.target.name)
-        .validation(e.target.value)
-        .then((validate) => {
-            setFormError({ ...formError, [e.target.name]: '' })
-        })
-        .catch((error) => {
-            setFormError({
-                ...formError,
-                [e.target.name]: error.errors[0],
-            })
-        })
+        .reach(schema, name)
+            .validate(value)
+                .then(() => {
+                    setFormError({
+                        ...formError,
+                        [name]: ''
+                    })
+                })
+                .catch((error) => {
+                    setFormError({
+                        ...formError,
+                        [name]: error.errors[0]
+                    })
+                })
     }
-
-    // axios.post('/https://anywherefitness2.herokuapp.com/', {
-    //     username: "",
-    //     password:"",
-    //     full_name:"",
-    //     signup_code:"",
-    // }).then(response => {
-    //     console.log(response)
-    // })
 
     const changeHandler = (e) => {
         e.persist();
+        const { name, value } = e.target;
+
         setFormData({
             ...form,
             [e.target.name]: e.target.value
         })
+
+        validate(name, value);
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
-        axios.post('https://anywherefitness2.herokuapp.com/api/auth/login', form)
-        .then(response => {
-            localStorage.setItem('token', response.data.token);
-            
-            setFormData(response.data)
-            console.log(response.data)
-            push('/')
-      })
-      .catch(err => {
-          console.log(err)
-      })
+        axios.post('https://anywherefitness2.herokuapp.com/api/auth/login', { username: form.username, password: form.password })
+            .then(response => {
+                localStorage.setItem('token', response.data.token);
+
+                console.log(response.data)
+                push('/')
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
     
     return (

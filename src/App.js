@@ -1,18 +1,18 @@
 import './App.css';
 import { Route, Switch, Link } from "react-router-dom"
-import { PrivateRoute } from './utils/PrivateRoute';
-import { useState } from 'react';
+import PrivateRoute from './utils/PrivateRoute';
 import fetchToken from './utils/fetchToken';
 
 import styled from "styled-components";
 
-import ClientPage from './components/client/Clientpage';
-import TrainerPage from "./components/trainer/Trainerpage"
+
 
 // PAGES (a collection of components that make up one view) //
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Signup from "./components/Signup"
+import ClientPage from './components/client/Clientpage';
+import TrainerPage from "./components/trainer/Trainerpage";
 
 
 export const StyledLinks = styled.div`
@@ -40,12 +40,9 @@ export const StyledLinks = styled.div`
 `;
 
 function App() {
-  const [loginStatus, setLoginStatus] = useState(false);
 
   const logout = () => {
     localStorage.removeItem("token")
-    
- 
   };
 
   return (
@@ -80,7 +77,7 @@ function App() {
         <Switch>
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/" component={Dashboard} />
+          <PrivateRoute exact path="/" component={Dashboard} />
           <PrivateRoute exact path="/trainerpage" component={TrainerPage}></PrivateRoute>
           <PrivateRoute exact path="/clientpage" component={ClientPage} />
         </Switch>

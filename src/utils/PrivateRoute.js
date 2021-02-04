@@ -1,18 +1,14 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom"
+import React from 'react';
+import { Redirect, Route } from 'react-router-dom';
+import hasToken from './fetchToken';
 
-export function PrivateRoute(props) {
-    const { children, ...rest } = props;
-    return (
-      <Route
-        {...rest}
-        render={({ location }) => {
-          return localStorage.getItem("token") ? (
-            children
-          ) : (
-              <Redirect to={{ pathname: "/trainerpage", state: { from: location } }} />
-            );
-        }}
-      />
+const PrivateRoute = ({ component: Component, ...rest }) => {
+    return(
+        <Route
+            {...rest}
+            render={props => hasToken() ? <Component {...props} /> : <Redirect to="/login" /> }
+        />
     );
-  }
+};
+
+export default PrivateRoute;
