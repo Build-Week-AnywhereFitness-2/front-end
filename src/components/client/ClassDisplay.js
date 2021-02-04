@@ -8,7 +8,7 @@ const ClassDisplay = (props) => {
     return (
         <div>
             {props.classes.map(cls => 
-                <ClassCard data={cls} key={cls.id} />
+                <ClassCard data={cls} key={cls.id} delClass={props.delClass}/>
                 )}
         </div>
     )

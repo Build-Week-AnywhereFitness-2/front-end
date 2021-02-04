@@ -34,7 +34,8 @@ function ClientPage (props) {
             <h1>Your Classes</h1>
         </div>
         <div>
-        <main>
+        <main> 
+            <div></div>
             <br/>
             <ClassDisplay dispatch={dispatch} data={state} delClass={onClickDeleteClientClass}/>
             

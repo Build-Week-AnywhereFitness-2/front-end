@@ -9,6 +9,8 @@ font-family:Helvetica, sans-serif;
 
 .buttons{
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .delete_button{
     margin-left: 5%;
@@ -19,40 +21,37 @@ font-family:Helvetica, sans-serif;
     align-items: flex-start;
     background-color: #3D434A;
     color: lightgrey;
-    margin:0 20%;
-    height: 50vh;
+    height: auto;
 
     
 }
 .classes_info{
     display: flex;
     flex-direction: column;
-    margin: 1%; 
     justify-content: space-evenly;
-    height: 100%
+    height: 90%;
 
 }
 
 h2{
     font-size: 2.5rem;
-    // margin: 5% 400%;
     text-decoration: underline;
     
 }
 p{
     font-size: 1.5rem;
-    margin: 5% 1%;
+    margin: 1% 1%;
     
 }
 button{
     background-color: #008CBA; /* Blue */
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 1em 20rem;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 1.5rem;
+    
 }
 
 
@@ -76,15 +75,6 @@ function ClassCard (props) {
             
         </div>
         <div className="buttons">
-            {/* <Route exact path="/updateclass">
-                    <UpdateClass />
-            
-            </Route> */}
-            <Link to="/updateclass/:id">
-                <button>
-                    Update
-                </button>
-            </Link>
             <br/>
             <button className="delete_button" onClick={() => props.onClickDeleteTrainerClass(props.data.id)}>Delete</button>
             </div>
