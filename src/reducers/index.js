@@ -33,7 +33,6 @@ export const initialState = {
     user: {},
     fetching: false,
     error: ""
-
 }
 
 export default function reducers(state = initialState, action){
