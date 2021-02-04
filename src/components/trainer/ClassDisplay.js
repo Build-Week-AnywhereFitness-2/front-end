@@ -4,11 +4,13 @@ import { getTrainerClasses } from "../../actions/index"
 import ClassCard from "./ClassCard"
 
 const ClassDisplay = (props) => {
+    console.log(props)
+
 
     return (
         <div>
             {props.classes.map(cls => 
-                <ClassCard data={cls} key={cls.id} delClass={props.onClickDeleteTrainerClass}/>
+                <ClassCard data={cls} key={cls.id} delClass={props.delClass}/>
                 )}
         </div>
     )

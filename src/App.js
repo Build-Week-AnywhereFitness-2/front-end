@@ -44,7 +44,8 @@ function App() {
 
   const logout = () => {
     localStorage.removeItem("token")
-    setLoginStatus(false);
+    
+ 
   };
 
   return (
@@ -64,7 +65,10 @@ function App() {
                 <Link className="link" to="/clientpage">Clients</Link>
               </a>
               <a className="link item">
-                <Link className="link" onClick={logout}>Logout</Link>
+                <Link className="link" to="/login">Login</Link>
+              </a>
+              <a className="link item">
+                <Link className="link" onClick={logout} to="/">Logout</Link>
               </a>
             </div>
           </header>
@@ -77,7 +81,7 @@ function App() {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Dashboard} />
-          <PrivateRoute exact path="/trainerpage" component={TrainerPage} />
+          <PrivateRoute exact path="/trainerpage" component={TrainerPage}></PrivateRoute>
           <PrivateRoute exact path="/clientpage" component={ClientPage} />
         </Switch>
       </div>

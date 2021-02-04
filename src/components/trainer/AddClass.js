@@ -2,6 +2,10 @@ import React, { useState } from "react"
 import { connect } from "react-redux"
 import { postTrainerClasses } from "../../actions/index"
 import styled from "styled-components";
+// import axiosWithAuth from "../../utils/axiosWithAuth"
+import axios from "axios"
+import fetchToken from "../../utils/fetchToken"
+import axiosWithAuth from "../../utils/axiosWithAuth";
 
 
 
@@ -74,12 +78,11 @@ const AddClass = (props) => {
         name: "",
         type:"",
         start_time:"",
-        durationHr:"",
+        duration_hour:"",
         intensity_level:"",
         location:"",
         attendees_amt: "",
         max_class_size: "",
-        error:""
     }
 
     const [classValues, setClassValues] = useState(initialClassData)
@@ -89,8 +92,10 @@ const AddClass = (props) => {
         const newClass = {
             ...classValues
         };
+        // console.log(newClass)
         props.postTrainerClasses(newClass)
         setClassValues(initialClassData)
+        
     }
 
     function handleChange (e) {
@@ -100,6 +105,32 @@ const AddClass = (props) => {
         })
     }
 
+    // const token = fetchToken();
+    // console.log(token)
+
+    // const userID = () => {
+    //     const token = localStorage.getItem("token");
+    
+    //     return axios.create({
+    //         baseURL: "https://anywherefitness2.herokuapp.com/api/auth/whoami",
+    //         headers: {Authorization: token}
+    //     })
+    // }
+
+    const getUserID = user => {
+        const token = localStorage.getItem("token")
+
+        axiosWithAuth().get("https://anywherefitness2.herokuapp.com/api/auth/whoami",
+        {headers: {Authorization: token}})
+        .then(res => {
+            console.log(res.data)
+        })
+
+    }
+
+    
+    
+
     return (
         <AddClassCardStyle>
         <div>
@@ -107,6 +138,7 @@ const AddClass = (props) => {
                 <h2>Add A Class</h2>
             
             <br/>
+            <span onClick={getUserID}>USERID</span>
             <form  onSubmit={handleSubmit}>
                 <div className="form_inputs">
                     <input
@@ -125,8 +157,10 @@ const AddClass = (props) => {
                     value={classValues.type}
                     placeholder="Type"
                     type="number"
+                    onkeydown="return false"
                     min="1"
                     max="3"
+                    pattern="^[1-3]*$"
                     />
                     <br/>
 
@@ -135,16 +169,20 @@ const AddClass = (props) => {
                     name="start_time"
                     id="start_time"
                     value={classValues.start_time}
-                    placeholder="Start Time"
+                    placeholder="YYYY-DD-MM HH-MM-SS"
+                    type="string date"
                     />
                     <br/>
 
                     <input
                     onChange={handleChange}
-                    name="durationHr"
-                    id="durationHr"
-                    value={classValues.durationHr}
+                    name="duration_hour"
+                    id="duration_hour"
+                    value={classValues.duration_hour}
                     placeholder="Duration"
+                    onKeyPress="return isNumber(handleChange)"
+                    type="number"
+                    step="0.1"
                     />
                     <br/>
 
@@ -200,12 +238,12 @@ const AddClass = (props) => {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        classes: state.classes
-    }
-}
+// const mapStateToProps = state => {
+//     return {
+//         classes: state.classes
+//     }
+// }
 
-const mapDispatchToProps = {postTrainerClasses}
+// const mapDispatchToProps = {postTrainerClasses}
 
-export default connect(mapStateToProps,mapDispatchToProps)(AddClass) 
+export default connect(null , { postTrainerClasses })(AddClass) 

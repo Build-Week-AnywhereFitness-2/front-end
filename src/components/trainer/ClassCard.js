@@ -59,6 +59,7 @@ button{
 `
 
 function ClassCard (props) {
+    // console.log(props)
 
     return(
         <ClassCardStyle>
@@ -84,7 +85,7 @@ function ClassCard (props) {
                 </button>
             </Link>
             <br/>
-            <button className="delete_button" onClick={() => props.onClickDeleteTrainerClass(props.data.id)}>Delete</button>
+            <button className="delete_button" onClick={() => props.delClass(props.data.id)}>Delete</button>
             </div>
         </div>
         

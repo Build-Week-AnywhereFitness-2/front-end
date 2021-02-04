@@ -1,4 +1,5 @@
 import axiosWithAuth from "../utils/axiosWithAuth"
+import axios from "axios"
 
 export const FETCH_CLASS_START = "FETCH_CLASS_START"
 export const FETCH_CLASS_SUCCESS = "FETCH_CLASS_SUCCESS"
@@ -17,10 +18,26 @@ export const DELETE_CLASS_SUCCESS = "DELETE_CLASS_SUCCESS"
 export const DELETE_CLASS_FAILURE = "DELETE_CLASS_FAILURE"
 
 export const getTrainerClasses = (id) => dispatch => {
+
+    // const userID = ""
+
+    // const getUserID = user => {
+    //     const token = localStorage.getItem("token")
+
+    //     axiosWithAuth().get("https://anywherefitness2.herokuapp.com/api/auth/whoami",
+    //     {headers: {Authorization: token}})
+    //     .then(res => {
+    //         userID = res.data.id
+
+    //     })
+
+    // }
+    
     
     dispatch({ type: FETCH_CLASS_START })
+    
 
-    axiosWithAuth().get(`/api/user/${id}/instructors-classes`)
+    axiosWithAuth().get(`/api/user/6/instructors-classes`)
     .then(res => {
 
         dispatch({ type: FETCH_CLASS_SUCCESS, payload: res.data })
@@ -31,24 +48,34 @@ export const getTrainerClasses = (id) => dispatch => {
 
 }
 
-export const postTrainerClasses = (cls, id) => dispatch => {
-
-    dispatch ({ type: POST_CLASS_START })
-
-    axiosWithAuth().post(`/api/classes/${id}/instructors-classes`, {name: cls.name, type: cls.type, start_time: cls.start, durationHr: cls.duration, intensity_level: cls.intensity, location: cls.location, attendees_amt: cls.registered, max_class_size: cls.max})
-    .then(res => {
-        dispatch ({ type: POST_CLASS_SUCCESS, payload: res.data })
+export const postTrainerClasses = (cls) => (dispatch) => {
+    
+    dispatch({ type: POST_CLASS_START });
+    axiosWithAuth().post('/api/classes',
+    {
+        name: cls.name, 
+        type: cls.type, 
+        start_time: cls.start_time, 
+        duration_hour: cls.duration_hour, 
+        intensity_level: cls.intensity_level, 
+        location: cls.location, 
+        attendees_amt: cls.attendees_amt, 
+        max_class_size: cls.max_class_size
     })
-    .catch(err => {
-        dispatch ({ type: POST_CLASS_FAILURE, payload: err })
-    })
-}
+        .then(res => {
+            dispatch({ type: POST_CLASS_SUCCESS, payload: res.data });
+        })
+        .catch(err => {
+            dispatch({ type: POST_CLASS_FAILURE, payload: err.response.data.message });
+        });
+};
+
 
 export const putTrainerClasses = (cls, id) => dispatch => {
 
     dispatch ({ type: PUT_CLASS_START })
 
-    axiosWithAuth().put(`/api/classes/${id}/instructors-classes`, {name: cls.name, type: cls.type, start_time: cls.start, durationHr: cls.duration, intensity_level: cls.intensity, location: cls.location, attendees_amt: cls.registered, max_class_size: cls.max})
+    axiosWithAuth().put(`/api/classes`, {name: cls.name, type: cls.type, start_time: cls.start, durationHr: cls.duration, intensity_level: cls.intensity, location: cls.location, attendees_amt: cls.registered, max_class_size: cls.max})
     .then(res => {
         dispatch ({ type: PUT_CLASS_SUCCESS, payload: res.data })
     })
