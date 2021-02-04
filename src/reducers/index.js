@@ -23,7 +23,7 @@ export const initialState = {
         name: "",
         type:"",
         start_time:"",
-        durationHr:"",
+        duration_hour:"",
         intensity_level:"",
         location:"",
         attendees_amt: "",

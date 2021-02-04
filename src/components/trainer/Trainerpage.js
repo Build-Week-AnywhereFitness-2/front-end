@@ -6,6 +6,7 @@ import ClassDisplay from "./ClassDisplay"
 import styled from "styled-components";
 import UpdateClass from "./UpdateClass"
 import { deleteTrainerClass } from "../../actions/index"
+import {connect} from "react-redux"
 
 const TrainerPageStyle = styled.div `
 
@@ -19,12 +20,13 @@ const TrainerPageStyle = styled.div `
 `
 
 function TrainerPage (props) {
+    console.log(props)
 
     const [state, dispatch] = useReducer(reducers, initialState)
 
-    // useEffect(() => {
-    //     props.getTrainerClasses();
-    // }, [getTrainerClasses])
+    useEffect(() => {
+        props.getTrainerClasses();
+    }, [getTrainerClasses])
     function onClickDeleteTrainerClass(id) {
         props.deleteTrainerClass(id);
     };
@@ -50,4 +52,10 @@ function TrainerPage (props) {
     )
 }
 
-export default TrainerPage
+function mapStateToProps(state) {
+    return {
+        classes: state.classes
+    }
+}
+
+export default connect(mapStateToProps, { getTrainerClasses })(TrainerPage)
