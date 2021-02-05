@@ -75,20 +75,19 @@ h2{
 const AddClass = (props) => {
 
     const newClassData = {
-
         name: "Nature Walk",
-        type:"1",
+        type: 1,
         start_time:"15:30",
-        duration_hour:"1",
-        intensity_level:"1",
+        duration_hour: 1,
+        intensity_level: 1,
         location:"Mount Rainier, WA",
-        attendees_amt: "10",
-        max_class_size: "100"
-        
+        attendees_amt: 0,
+        max_class_size: 100
     }
 
     const [classValues, setClassValues] = useState(newClassData)
     const [user, setUser] = useState({})
+
     function handleSubmit (e) {
         e.preventDefault();
         axiosWithAuth().get('/api/auth/whoami')
@@ -98,7 +97,7 @@ const AddClass = (props) => {
                 ...res.data
             });
             console.log(res.data)
-          
+
             props.postTrainerClasses(classValues);
         })
 
@@ -150,34 +149,6 @@ const AddClass = (props) => {
 
     }
 
-    const getTClass = () => {
-        const token = localStorage.getItem("token")
-
-        axios.post("https://anywherefitness2.herokuapp.com/api/classes",
-        {
-            "name": "Walking",
-            "type":"1",
-            "start_time":"12:30",
-            "duration_hour":"1",
-            "intensity_level":"1",
-            "location":"Mount Rainier, WA",
-            "attendees_amt": "10",
-            "max_class_size": "100"
-        },
-        {headers: {Authorization: token}})
-        .then(res => {
-            console.log(res)
-             
-        })
-        .catch(err => {
-            console.log(err)
-        })
-        
-    }
-
-    
-    
-
     return (
         <AddClassCardStyle>
         <div>
@@ -185,8 +156,6 @@ const AddClass = (props) => {
                 <h2>Add A Class</h2>
             
             <br/>
-            <span onClick={getUserID}>USERID</span>
-            <span onClick={getTClass}>data</span>
             <form  onSubmit={handleSubmit}>
                 <div className="form_inputs">
                     <input
@@ -295,5 +264,5 @@ const mapStateToProps = state => {
 
 // const mapDispatchToProps = {postTrainerClasses}
 
-export default connect(mapStateToProps , { postTrainerClasses })(AddClass) 
+export default connect(mapStateToProps , { postTrainerClasses })(AddClass)
 

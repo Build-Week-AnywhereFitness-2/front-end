@@ -12,7 +12,7 @@ import { Center, Spinner } from '@chakra-ui/react';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import fetchToken from './utils/fetchToken';
-import TrainerPage from "./components/trainers/TrainerPage"
+import TrainerPage from "./pages/TrainerPage"
 
 function App(props) {
 
