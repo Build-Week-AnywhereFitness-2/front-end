@@ -1,35 +1,20 @@
-import { 
+import {
     FETCH_CLASS_START,
-    FETCH_CLASS_SUCCESS, 
-    FETCH_CLASS_FAILURE, 
+    FETCH_CLASS_SUCCESS,
+    FETCH_CLASS_FAILURE,
 
-    POST_CLASS_START, 
-    POST_CLASS_SUCCESS, 
-    POST_CLASS_FAILURE, 
+    ATTEND_CLASS_START,
+    ATTEND_CLASS_SUCCESS,
+    ATTEND_CLASS_FAILURE,
 
-    PUT_CLASS_START,
-    PUT_CLASS_SUCCESS,
-    PUT_CLASS_FAILURE,
+    FETCH_MY_CLASSES_START,
+    FETCH_MY_CLASSES_SUCCESS,
+    FETCH_MY_CLASSES_FAILURE
 
-    DELETE_CLASS_START,
-    DELETE_CLASS_SUCCESS,
-    DELETE_CLASS_FAILURE
-
-} from "../actions/index"
+} from "../actions/index";
 
 export const initialState = {
-    classes: [
-        {
-            name: "",
-            type:"",
-            start_time:"",
-            duration_hour:"",
-            intensity_level:"",
-            location:"",
-            attendees_amt: "",
-            max_class_size: ""
-        }
-    ],
+    classes: [],
     user: {},
     fetching: false,
     error: ""
@@ -42,91 +27,62 @@ export default function reducers(state = initialState, action){
                 ...state,
                 fetching: true
             }
+
         case FETCH_CLASS_SUCCESS:
             return {
                 ...state,
-                classes: [...action.payload],
+                classes: action.payload,
                 fetching: false
             }
+
         case FETCH_CLASS_FAILURE:
-            return{
+            return {
                 ...state,
                 error: action.payload,
                 fetching: false
             }
 
-        case POST_CLASS_START:
+        case ATTEND_CLASS_START:
             return {
                 ...state,
                 fetching: true
             }
-        case POST_CLASS_SUCCESS:
+
+        case ATTEND_CLASS_SUCCESS:
             return {
                 ...state,
-                classes: [...state.classes, action.payload],
                 fetching: false
             }
-        case POST_CLASS_FAILURE:
-            return{
+
+        case ATTEND_CLASS_FAILURE:
+            return {
                 ...state,
                 error: action.payload,
                 fetching: false
             }
 
-        case PUT_CLASS_START:
+        case FETCH_MY_CLASSES_START:
             return {
                 ...state,
                 fetching: true
             }
-        case PUT_CLASS_SUCCESS:
 
-            const newClassArray = state.classes.filter(cls => {
-                if (cls.id === action.payload.id) {
-                    return false;
-                }else {
-                    return true;
-                }
-            });
+        case FETCH_MY_CLASSES_SUCCESS:
             return {
                 ...state,
-                classes: [...newClassArray, action.payload],
+                user: {...state.user, classesAttending: action.payload},
                 fetching: false
             }
- 
-        case PUT_CLASS_FAILURE:
-            return{
+
+        case FETCH_MY_CLASSES_FAILURE:
+            return {
                 ...state,
                 error: action.payload,
-                fetching: false
+                fetching: false,
             }
 
-        case DELETE_CLASS_START:
-            return {
-                ...state,
-                fetching: true
-            }
-        case DELETE_CLASS_SUCCESS:
-            const deleteFromClasses = state.classes.filter(cls => {
-                if (cls.id === action.payload.id){
-                    return false;
-                }else {
-                    return true
-                }
-            })
-
-            return {
-                ...state,
-                classes: [...deleteFromClasses],
-                fetching: false
-            }
-        case DELETE_CLASS_FAILURE:
-            return{
-                ...state,
-                error: action.payload,
-                fetching: false
-            }
         default:
-            return{
+            return {
                 ...state
             }
     }
