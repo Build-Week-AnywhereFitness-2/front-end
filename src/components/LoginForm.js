@@ -47,7 +47,7 @@ function LoginForm(props) {
 
     return (
         <form onSubmit={onSubmit}>
-             <Stack spacing="12px" width="70%" minWidth="320px" margin="0 auto" border="1px solid gainsboro" borderRadius="8px" padding="1rem" marginBottom="20px">
+             <Stack spacing="12px" width="70%" minWidth="320px" margin="0 auto" border="0.0625rem solid gainsboro" borderRadius="8px" padding="1rem" marginBottom="20px">
                 <FormControl isRequired isInvalid={formErrors.username.length > 0 ? true : false}>
                     <FormLabel htmlFor="username">Username</FormLabel>
                     <Input name="username" value={formValues.username} onChange={onChange} id="username" placeholder="Username" />
@@ -63,7 +63,7 @@ function LoginForm(props) {
                 </FormControl>
                 <Center paddingY="15px">
                     <Button
-                        border="1px solid gainsboro"
+                        border="0.0625rem solid gainsboro"
                         fontSize="1.2rem"
                         type="submit"
                         isDisabled={isButtonDisabled}

@@ -29,11 +29,11 @@ function Dashboard(props) {
     }, [])
 
     return (
-        <Box margin="0 auto" width="90%" paddingY="20px">
+        <Box margin="0 auto" width="90%" paddingY="1.25rem">
             <Heading fontSize="3xl" as="h2" textAlign="center">Dashboard</Heading>
-            <Box borderTop="1px solid gainsboro" mt="20px" paddingY="10px">
+            <Box borderTop="1px solid gainsboro" mt="1.25rem" paddingY="0.625rem">
                 <Heading fontSize="2xl" as="h3" textAlign="center">All Classes</Heading>
-                <Accordion mt="8px">
+                <Accordion mt="0.5rem">
                     {props.classes &&
                         props.classes.map(cls => {
                             return <ClassAccordionItem key={cls.id} data={cls} onAttend={() => props.attendClass(user.id, cls)} />
@@ -41,9 +41,9 @@ function Dashboard(props) {
                     }
                 </Accordion>
             </Box>
-            <Box borderTop="1px solid gainsboro" mt="20px" paddingY="10px">
+            <Box borderTop="1px solid gainsboro" mt="1.25rem" paddingY="0.625rem">
                 <Heading fontSize="2xl" as="h3" textAlign="center">My Classes</Heading>
-                <Accordion mt="8px">
+                <Accordion mt="0.5rem">
                     {props.user.classesAttending &&
                         props.user.classesAttending.map(cls => {
                             return <ClassAccordionItem key={cls.id} data={cls} />
