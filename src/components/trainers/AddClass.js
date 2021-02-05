@@ -75,14 +75,14 @@ h2{
 const AddClass = (props) => {
 
     const newClassData = {
-        name: "Nature Walk",
-        type: 1,
-        start_time:"15:30",
-        duration_hour: 1,
-        intensity_level: 1,
-        location:"Mount Rainier, WA",
-        attendees_amt: 0,
-        max_class_size: 100
+        name: "",
+        type: "",
+        start_time:"",
+        duration_hour: "",
+        intensity_level: "",
+        location:"",
+        attendees_amt: "",
+        max_class_size: ""
     }
 
     const [classValues, setClassValues] = useState(newClassData)
