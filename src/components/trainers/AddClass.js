@@ -152,8 +152,6 @@ const AddClass = (props) => {
                 <h2>Add A Class</h2>
             
             <br/>
-            <span onClick={getUserID}>USERID</span>
-            <span onClick={get5Class}>data</span>
             <form  onSubmit={handleSubmit}>
                 <div className="form_inputs">
                     <input
@@ -184,7 +182,7 @@ const AddClass = (props) => {
                     name="start_time"
                     id="start_time"
                     value={classValues.start_time}
-                    placeholder="YYYY-DD-MM HH-MM-SS"
+                    placeholder="Start Time"
                     type="string date"
                     />
                     <br/>

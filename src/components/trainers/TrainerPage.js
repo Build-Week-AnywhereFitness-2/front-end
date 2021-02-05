@@ -8,6 +8,13 @@ import styled from "styled-components";
 // import { deleteTrainerClass } from "../../actions/index"
 import {connect} from "react-redux"
 import axiosWithAuth from "../../utils/axiosWithAuth"
+import TrainerClassAccordionItem from "./TrainerClassAccordion"
+
+import {
+    Box,
+    Heading,
+    Accordion
+} from '@chakra-ui/react';
 
 const TrainerPageStyle = styled.div `
 
@@ -21,15 +28,26 @@ const TrainerPageStyle = styled.div `
 `
 
 function TrainerPage (props) {
-    console.log(props)
 
-    // const [state, dispatch] = useReducer(reducers, initialState)
-
+    const [state, dispatch] = useReducer(reducers, initialState)
+    const [user, setUser] = useState({});
+    console.log(user)
 
     useEffect(() => {
+        axiosWithAuth().get('/api/auth/whoami')
+            .then(res => {
+                setUser({
+                    ...user,
+                    ...res.data
+                });
+                console.log(res.data.id)
+              
+                props.getTrainerClasses(res.data.id);
+            })
+
         props.getTrainerClasses();
-        // console.log(props.classes)
     }, [])
+
     function onClickDeleteTrainerClass(id) {
         props.deleteTrainerClass(id);
     };
@@ -42,12 +60,22 @@ function TrainerPage (props) {
         </div>
         <div>
         <main>
-            <AddClass  />
+            <AddClass dispatch={dispatch} />
             
             <br/>
-            <ClassDisplay  data={props.classes} delClass={onClickDeleteTrainerClass}/>
-            
-            
+        <Box margin="0 auto" width="90%" paddingY="20px">
+            <Heading fontSize="3xl" as="h2" textAlign="center">Your Classes</Heading>
+            <Box borderTop="1px solid gainsboro" mt="20px" paddingY="10px">
+                <Accordion mt="8px">
+                    {props.classes &&
+                        props.classes.map(cls => {
+                            return <TrainerClassAccordionItem key={cls.id} data={cls}  />
+                        })
+                    }
+                </Accordion>
+            </Box>
+            </Box>
+        
         </main>
         </div>
         </TrainerPageStyle>
@@ -57,7 +85,8 @@ function TrainerPage (props) {
 
 function mapStateToProps(state) {
     return {
-        classes: state.classes
+        classes: state.classes,
+        user: state.user
     }
 }
 

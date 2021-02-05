@@ -107,12 +107,12 @@ export default function reducers(state = initialState, action){
                 ...state,
                 fetching: true
             }
-        case FETCH_TRAINER_CLASS_SUCCESS:
-            return {
-                ...state,
-                classes: [...action.payload],
-                fetching: false
-            }
+            case FETCH_TRAINER_CLASS_SUCCESS:
+                return {
+                    ...state,
+                    classes: action.payload,
+                    fetching: false
+                }
         case FETCH_TRAINER_CLASS_FAILURE:
             return{
                 ...state,

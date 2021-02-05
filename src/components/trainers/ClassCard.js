@@ -77,8 +77,8 @@ function ClassCard (props) {
         <ClassCardStyle>
         <div className="classes">
             <div className="classes_info">
-                <h2>Name: {props.data.class_name}</h2>
-                <p>Type: {type(props.data.class_type)}</p>
+                <h2>Name: {props.data.name}</h2>
+                <p>Type: {type(props.data.type)} hours</p>
                 <p>Start Time: {props.data.start_time}</p>
                 <p>Duration: {props.data.duration_hour}</p>
                 <p>Intensity: {props.data.intensity_level}</p>
