@@ -9,9 +9,27 @@ import {
 
     FETCH_MY_CLASSES_START,
     FETCH_MY_CLASSES_SUCCESS,
-    FETCH_MY_CLASSES_FAILURE
+    FETCH_MY_CLASSES_FAILURE,
+
+    FETCH_TRAINER_CLASS_START,
+    FETCH_TRAINER_CLASS_SUCCESS, 
+    FETCH_TRAINER_CLASS_FAILURE, 
+
+    POST_TRAINER_CLASS_START, 
+    POST_TRAINER_CLASS_SUCCESS, 
+    POST_TRAINER_CLASS_FAILURE, 
+
+    PUT_TRAINER_CLASS_START,
+    PUT_TRAINER_CLASS_SUCCESS,
+    PUT_TRAINER_CLASS_FAILURE,
+
+    DELETE_TRAINER_CLASS_START,
+    DELETE_TRAINER_CLASS_SUCCESS,
+    DELETE_TRAINER_CLASS_FAILURE
+
 
 } from "../actions/index";
+
 
 export const initialState = {
     classes: [],
@@ -84,11 +102,99 @@ export default function reducers(state = initialState, action){
                 error: action.payload,
                 fetching: false,
             }
-
-        default:
+        case FETCH_TRAINER_CLASS_START:
             return {
+                ...state,
+                fetching: true
+            }
+        case FETCH_TRAINER_CLASS_SUCCESS:
+            return {
+                ...state,
+                classes: [...action.payload],
+                fetching: false
+            }
+        case FETCH_TRAINER_CLASS_FAILURE:
+            return{
+                ...state,
+                error: action.payload,
+                fetching: false
+            }
+
+        case POST_TRAINER_CLASS_START:
+            return {
+                ...state,
+                fetching: true
+            }
+        case POST_TRAINER_CLASS_SUCCESS:
+            return {
+                ...state,
+                classes: [...state.classes, action.payload],
+                fetching: false
+            }
+        case POST_TRAINER_CLASS_FAILURE:
+            return{
+                ...state,
+                error: action.payload,
+                fetching: false
+            }
+
+        case PUT_TRAINER_CLASS_START:
+            return {
+                ...state,
+                fetching: true
+            }
+        case PUT_TRAINER_CLASS_SUCCESS:
+
+            const newClassArray = state.classes.filter(cls => {
+                if (cls.id === action.payload.id) {
+                    return false;
+                }else {
+                    return true;
+                }
+            });
+            return {
+                ...state,
+                classes: [...newClassArray, action.payload],
+                fetching: false
+            }
+    
+        case PUT_TRAINER_CLASS_FAILURE:
+            return{
+                ...state,
+                error: action.payload,
+                fetching: false
+            }
+
+        case DELETE_TRAINER_CLASS_START:
+            return {
+                ...state,
+                fetching: true
+            }
+        case DELETE_TRAINER_CLASS_SUCCESS:
+            const deleteFromClasses = state.classes.filter(cls => {
+                if (cls.id === action.payload.id){
+                    return false;
+                }else {
+                    return true
+                }
+            })
+
+            return {
+                ...state,
+                classes: [...deleteFromClasses],
+                fetching: false
+            }
+        case DELETE_TRAINER_CLASS_FAILURE:
+            return{
+                ...state,
+                error: action.payload,
+                fetching: false
+            }
+        default:
+            return{
                 ...state
             }
+
     }
 
 }

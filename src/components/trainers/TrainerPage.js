@@ -4,7 +4,7 @@ import AddClass from "./AddClass"
 import { getTrainerClasses } from "../../actions/index"
 import ClassDisplay from "./ClassDisplay"
 import styled from "styled-components";
-import UpdateClass from "./UpdateClass"
+// import UpdateClass from "./UpdateClass"
 // import { deleteTrainerClass } from "../../actions/index"
 import {connect} from "react-redux"
 import axiosWithAuth from "../../utils/axiosWithAuth"
@@ -21,19 +21,19 @@ const TrainerPageStyle = styled.div `
 `
 
 function TrainerPage (props) {
-    // console.log(props)
+    console.log(props)
 
-    const [state, dispatch] = useReducer(reducers, initialState)
-    const [clss, setclss] = useState(initialState)
+    // const [state, dispatch] = useReducer(reducers, initialState)
+
 
     useEffect(() => {
         props.getTrainerClasses();
-    }, [getTrainerClasses])
+        // console.log(props.classes)
+    }, [])
     function onClickDeleteTrainerClass(id) {
         props.deleteTrainerClass(id);
     };
 
-    console.log(state)
 
     return (
         <TrainerPageStyle>
@@ -42,10 +42,10 @@ function TrainerPage (props) {
         </div>
         <div>
         <main>
-            <AddClass dispatch={dispatch} />
+            <AddClass  />
             
             <br/>
-            <ClassDisplay dispatch={dispatch} data={state} delClass={onClickDeleteTrainerClass}/>
+            <ClassDisplay  data={props.classes} delClass={onClickDeleteTrainerClass}/>
             
             
         </main>

@@ -2,7 +2,7 @@
 import React from "react"
 import styled from "styled-components";
 import { Route, Link } from "react-router-dom";
-import UpdateClass from "./UpdateClass"
+// import UpdateClass from "./UpdateClass"
 
 const ClassCardStyle = styled.div`
 
@@ -71,7 +71,7 @@ function type (num)  {
 }
 
 function ClassCard (props) {
-    // console.log(props)
+    console.log(props.data)
 
     return(
         <ClassCardStyle>

@@ -123,7 +123,7 @@ const AddClass = (props) => {
         axiosWithAuth().get("https://anywherefitness2.herokuapp.com/api/auth/whoami",
         {headers: {Authorization: token}})
         .then(res => {
-            console.log(res.data)
+            console.log(res)
         })
 
     }
@@ -152,7 +152,8 @@ const AddClass = (props) => {
                 <h2>Add A Class</h2>
             
             <br/>
-            <span onClick={get5Class}>USERID</span>
+            <span onClick={getUserID}>USERID</span>
+            <span onClick={get5Class}>data</span>
             <form  onSubmit={handleSubmit}>
                 <div className="form_inputs">
                     <input
@@ -171,7 +172,7 @@ const AddClass = (props) => {
                     value={classValues.type}
                     placeholder="Type"
                     type="number"
-                    onkeydown="return false"
+
                     min="1"
                     max="3"
                     pattern="^[1-3]*$"
@@ -194,7 +195,7 @@ const AddClass = (props) => {
                     id="duration_hour"
                     value={classValues.duration_hour}
                     placeholder="Duration"
-                    onKeyPress="return isNumber(handleChange)"
+
                     type="number"
                     step="0.1"
                     />
