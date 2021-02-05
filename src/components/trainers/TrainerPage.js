@@ -31,7 +31,6 @@ function TrainerPage (props) {
 
     const [state, dispatch] = useReducer(reducers, initialState)
     const [user, setUser] = useState({});
-    console.log(user)
 
     useEffect(() => {
         axiosWithAuth().get('/api/auth/whoami')

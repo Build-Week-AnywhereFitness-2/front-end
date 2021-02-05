@@ -33,6 +33,7 @@ import {
 
 export const initialState = {
     classes: [],
+    newClassData: [],
     user: {},
     fetching: false,
     error: ""
@@ -102,17 +103,21 @@ export default function reducers(state = initialState, action){
                 error: action.payload,
                 fetching: false,
             }
+
+
         case FETCH_TRAINER_CLASS_START:
             return {
                 ...state,
                 fetching: true
             }
-            case FETCH_TRAINER_CLASS_SUCCESS:
-                return {
-                    ...state,
-                    classes: action.payload,
-                    fetching: false
-                }
+        case FETCH_TRAINER_CLASS_SUCCESS:
+            return {
+                ...state,
+                classes: action.payload,
+                user: {...state.user },
+
+                fetching: false
+            }
         case FETCH_TRAINER_CLASS_FAILURE:
             return{
                 ...state,
@@ -123,12 +128,14 @@ export default function reducers(state = initialState, action){
         case POST_TRAINER_CLASS_START:
             return {
                 ...state,
+                
                 fetching: true
             }
         case POST_TRAINER_CLASS_SUCCESS:
             return {
                 ...state,
                 classes: [...state.classes, action.payload],
+                user: {...state.user },
                 fetching: false
             }
         case POST_TRAINER_CLASS_FAILURE:

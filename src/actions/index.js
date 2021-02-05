@@ -53,24 +53,15 @@ export const getTrainerClasses = (id) => dispatch => {
         })
 }
 
-export const postTrainerClasses = (cls) => (dispatch) => {
+export const postTrainerClasses = (cls  ) => (dispatch) => {
     dispatch({ type: POST_TRAINER_CLASS_START });
 
-    axiosWithAuth().post('/api/classes', {
-        name: cls.name,
-        type: cls.type, 
-        start_time: cls.start_time, 
-        duration_hour: cls.duration_hour, 
-        intensity_level: cls.intensity_level, 
-        location: cls.location, 
-        attendees_amt: cls.attendees_amt, 
-        max_class_size: cls.max_class_size
-    })
+    axiosWithAuth().post('api/classes', {cls} )
         .then(res => {
             dispatch({ type: POST_TRAINER_CLASS_SUCCESS, payload: res.data });
         })
         .catch(err => {
-            dispatch({ type: POST_TRAINER_CLASS_FAILURE, payload: err.response.data.message });
+            dispatch({ type: POST_TRAINER_CLASS_FAILURE, payload: err });
         });
 };
 

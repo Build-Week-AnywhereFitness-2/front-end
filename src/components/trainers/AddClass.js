@@ -74,28 +74,35 @@ h2{
 
 const AddClass = (props) => {
 
-    const initialClassData = {
-        name: "",
-        type:"",
-        start_time:"",
-        duration_hour:"",
-        intensity_level:"",
-        location:"",
-        attendees_amt: "",
-        max_class_size: "",
+    const newClassData = {
+
+        name: "Nature Walk",
+        type:"1",
+        start_time:"15:30",
+        duration_hour:"1",
+        intensity_level:"1",
+        location:"Mount Rainier, WA",
+        attendees_amt: "10",
+        max_class_size: "100"
+        
     }
 
-    const [classValues, setClassValues] = useState(initialClassData)
-
+    const [classValues, setClassValues] = useState(newClassData)
+    const [user, setUser] = useState({})
     function handleSubmit (e) {
         e.preventDefault();
-        const newClass = {
-            ...classValues
-        };
-        // console.log(newClass)
-        props.postTrainerClasses(newClass)
-        setClassValues(initialClassData)
-        
+        axiosWithAuth().get('/api/auth/whoami')
+        .then(res => {
+            setUser({
+                ...user,
+                ...res.data
+            });
+            console.log(res.data)
+          
+            props.postTrainerClasses(classValues);
+        })
+
+    // props.postTrainerClasses();
     }
 
     function handleChange (e) {
@@ -105,53 +112,68 @@ const AddClass = (props) => {
         })
     }
 
+    // useEffect(() => {
+    //     axiosWithAuth().get('/api/auth/whoami')
+    //         .then(res => {
+    //             setUser({
+    //                 ...user,
+    //                 ...res.data
+    //             });
+    //             console.log(res.data.id)
+              
+    //             props.getTrainerClasses(res.data.id);
+    //         })
+
+    //     props.getTrainerClasses();
+    // }, [])
+
     // const token = fetchToken();
     // console.log(token)
 
-    // const userID = () => {
-    //     const token = localStorage.getItem("token");
+    const userID = () => {
+        const token = localStorage.getItem("token");
     
-    //     return axios.create({
-    //         baseURL: "https://anywherefitness2.herokuapp.com/api/auth/whoami",
-    //         headers: {Authorization: token}
-    //     })
-    // }
+        return axios.create({
+            baseURL: "https://anywherefitness2.herokuapp.com/api/auth/whoami",
+            headers: {Authorization: token}
+        })
+    }
 
-    // const getUserID = user => {
-    //     const token = localStorage.getItem("token")
+    const getUserID = user => {
+        const token = localStorage.getItem("token")
 
-    //     axios.get("https://anywherefitness2.herokuapp.com/api/auth/whoami",
-    //     {headers: {Authorization: token}})
-    //     .then(res => {
-    //         console.log(res)
-    //     })
+        axios.get("https://anywherefitness2.herokuapp.com/api/auth/whoami",
+        {headers: {Authorization: token}})
+        .then(res => {
+            console.log(res)
+        })
 
-    // }
+    }
 
-    // const getTClass = () => {
-    //     const token = localStorage.getItem("token")
+    const getTClass = () => {
+        const token = localStorage.getItem("token")
 
-    //     axios.post("https://anywherefitness2.herokuapp.com/api/classes",
-    //     {
-    //         "name": "Walking",
-    //         "type":"1",
-    //         "start_time":"12:30",
-    //         "duration_hour":"1",
-    //         "intensity_level":"1",
-    //         "location":"Mount Rainier, WA",
-    //         "attendees_amt": "10",
-    //         "max_class_size": "100"
-    //     },
-    //     {headers: {Authorization: token}})
-    //     .then(res => {
-    //         console.log(res)
+        axios.post("https://anywherefitness2.herokuapp.com/api/classes",
+        {
+            "name": "Walking",
+            "type":"1",
+            "start_time":"12:30",
+            "duration_hour":"1",
+            "intensity_level":"1",
+            "location":"Mount Rainier, WA",
+            "attendees_amt": "10",
+            "max_class_size": "100"
+        },
+        {headers: {Authorization: token}})
+        .then(res => {
+            console.log(res)
              
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //     })
+        })
+        .catch(err => {
+            console.log(err)
+        })
         
-    // }
+    }
 
     
     
@@ -163,8 +185,8 @@ const AddClass = (props) => {
                 <h2>Add A Class</h2>
             
             <br/>
-            {/* <span onClick={getUserID}>USERID</span>
-            <span onClick={getTClass}>data</span> */}
+            <span onClick={getUserID}>USERID</span>
+            <span onClick={getTClass}>data</span>
             <form  onSubmit={handleSubmit}>
                 <div className="form_inputs">
                     <input
@@ -264,13 +286,14 @@ const AddClass = (props) => {
     )
 }
 
-// const mapStateToProps = state => {
-//     return {
-//         classes: state.classes
-//     }
-// }
+const mapStateToProps = state => {
+    return {
+        classes: state.classes,
+        user: state.user
+    }
+}
 
 // const mapDispatchToProps = {postTrainerClasses}
 
-export default connect(null , { postTrainerClasses })(AddClass) 
+export default connect(mapStateToProps , { postTrainerClasses })(AddClass) 
 
