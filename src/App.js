@@ -2,7 +2,11 @@ import './App.css';
 import { Route, Switch } from "react-router-dom";
 import PrivateRoute from './utils/PrivateRoute';
 
+import { connect } from 'react-redux';
+
 import Nav from './components/Nav';
+
+import { Center, Spinner } from '@chakra-ui/react';
 
 // PAGES (a collection of components that make up one view) //
 import Login from './pages/Login';
@@ -21,6 +25,11 @@ function App(props) {
 
       {/* Render the pages here */}
       <div className="view-container">
+        {props.fetching && // Display spinner if we are fetching some data
+          <Center paddingY="40px">
+            <Spinner />
+          </Center>
+        }
         <Switch>
           <Route exact path="/login" component={Login} />
 
@@ -31,5 +40,11 @@ function App(props) {
   );
 }
 
+function mapStateToProps(state) {
+  return {
+    fetching: state.fetching
+  }
+}
 
-export default App
+
+export default connect(mapStateToProps, null)(App)
