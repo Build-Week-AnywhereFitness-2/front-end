@@ -8,6 +8,7 @@ import Nav from './components/Nav';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import fetchToken from './utils/fetchToken';
+import TrainerPage from "./components/trainers/TrainerPage"
 
 function App(props) {
 
@@ -23,6 +24,7 @@ function App(props) {
       <div className="view-container">
         <Switch>
           <Route exact path="/login" component={Login} />
+          <Route exact path="/trainerpage" component={TrainerPage} />
 
           <PrivateRoute exact path="/" component={Dashboard} />
         </Switch>
