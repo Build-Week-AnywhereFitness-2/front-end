@@ -45,6 +45,7 @@ input {
     margin: 0.5% 10px;
     box-sizing: border-box;
     text-align: center;
+    color: black;
 
   }
 
@@ -99,9 +100,9 @@ const AddClass = (props) => {
             console.log(res.data)
 
             props.postTrainerClasses(classValues);
+            setClassValues(newClassData)
         })
 
-    // props.postTrainerClasses();
     }
 
     function handleChange (e) {
@@ -109,44 +110,6 @@ const AddClass = (props) => {
             ...classValues,
             [e.target.name]: e.target.value
         })
-    }
-
-    // useEffect(() => {
-    //     axiosWithAuth().get('/api/auth/whoami')
-    //         .then(res => {
-    //             setUser({
-    //                 ...user,
-    //                 ...res.data
-    //             });
-    //             console.log(res.data.id)
-              
-    //             props.getTrainerClasses(res.data.id);
-    //         })
-
-    //     props.getTrainerClasses();
-    // }, [])
-
-    // const token = fetchToken();
-    // console.log(token)
-
-    const userID = () => {
-        const token = localStorage.getItem("token");
-    
-        return axios.create({
-            baseURL: "https://anywherefitness2.herokuapp.com/api/auth/whoami",
-            headers: {Authorization: token}
-        })
-    }
-
-    const getUserID = user => {
-        const token = localStorage.getItem("token")
-
-        axios.get("https://anywherefitness2.herokuapp.com/api/auth/whoami",
-        {headers: {Authorization: token}})
-        .then(res => {
-            console.log(res)
-        })
-
     }
 
     return (
