@@ -1,0 +1,29 @@
+
+import React, { useEffect } from "react"
+import { connect } from "react-redux"
+import { getTrainerClasses } from "../../actions/index" 
+import ClassCard from "./ClassCard"
+
+
+const ClassDisplay = (props) => {
+    console.log(props.data)
+
+
+    return (
+        <div>
+            {props.classes.map(cls => 
+                <ClassCard data={cls} key={cls.id} delClass={props.delClass}/>
+                )}
+        </div>
+    )
+}
+
+const mapStateToProps = (state) => {
+    return {
+        classes: state.classes,
+        loading: state.loading,
+        error: state.error
+    }
+}
+
+export default connect(mapStateToProps, {getTrainerClasses})(ClassDisplay)
