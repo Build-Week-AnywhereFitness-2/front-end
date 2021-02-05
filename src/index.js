@@ -7,16 +7,19 @@ import { Provider } from "react-redux"
 import thunk from "redux-thunk"
 import logger from "redux-logger"
 import reducers from "./reducers/index"
+import { ChakraProvider } from "@chakra-ui/react"
 
 export const store = createStore(reducers, applyMiddleware(thunk, logger))
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
+    <ChakraProvider resetCSS>
+      <Provider store={store}>
+        <Router>
+          <App />
+        </Router>
+      </Provider>
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

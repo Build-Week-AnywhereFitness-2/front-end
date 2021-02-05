@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import styled from "styled-components";
 
 export const StyledLinks = styled.div`
@@ -7,8 +7,6 @@ export const StyledLinks = styled.div`
     .link {
       text-decoration: none;
       color: lightgrey;
-      margin: 1rem;
-      flex-basis: fit-content;
     }
     .link:hover{
         color: white;
@@ -20,34 +18,33 @@ export const StyledLinks = styled.div`
     .menu {
       display: flex;
       justify-content: space-evenly;
+      align-items: center;
       padding: 0.5rem 0 0.5rem 0;
     }
     h1 {
       padding: 1rem;
       color: gainsboro;
+      font-size: 1.3rem;
     }
 `;
 
 function Nav() {
+    const history = useHistory();
+
+    const onLogout = () => {
+        localStorage.removeItem('token');
+        history.push('/login');
+        history.go();
+    }
+
     return (
         <StyledLinks>
             <div className="ui menu" >
                 <h1>🏋️‍♀️ ANYWHERE FITNESS 🏋️‍♀️</h1>
-                <a className="item link">
-                    <Link className="link" to="/">Dashboard</Link>
-                </a>
-                <a className="link item">
-                    <Link className="link" to="/trainerpage">Trainers</Link>
-                </a>
-                <a className="link item">
-                    <Link className="link" to="/clientpage">Clients</Link>
-                </a>
-                <a className="link item">
-                    <Link className="link" to="/login">Login</Link>
-                </a>
-                <a className="link item">
-                    <Link className="link" to="/">Logout</Link>
-                </a>
+                <Link className="link" to="/">Dashboard</Link>
+                <Link className="link" to="/trainerpage">Trainers</Link>
+                <Link className="link" to="/clientpage">Clients</Link>
+                <Link className="link" onClick={onLogout}>Logout</Link>
             </div>
         </StyledLinks>
     )
