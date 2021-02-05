@@ -1,16 +1,16 @@
 import React from 'react'
-import LoginForm from '../components/LoginForm';
+import SignupForm from '../components/SignupForm';
 
 import {
     Center
 } from '@chakra-ui/react';
 
-function Login() {
+function Signup() {
     return (
         <Center height="100vh" bgColor="#3D434A">
-            <LoginForm />
+            <SignupForm />
         </Center>
     )
 }
 
-export default Login
+export default Signup

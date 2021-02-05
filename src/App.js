@@ -10,6 +10,7 @@ import { Center, Spinner } from '@chakra-ui/react';
 
 // PAGES (a collection of components that make up one view) //
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import fetchToken from './utils/fetchToken';
 import TrainerPage from "./pages/TrainerPage"
@@ -33,6 +34,7 @@ function App(props) {
         }
         <Switch>
           <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />
           <Route exact path="/trainerpage" component={TrainerPage} />
 
           <PrivateRoute exact path="/" component={Dashboard} />
