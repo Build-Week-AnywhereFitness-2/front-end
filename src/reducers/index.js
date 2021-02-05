@@ -15,7 +15,7 @@ import {
     FETCH_TRAINER_CLASS_SUCCESS, 
     FETCH_TRAINER_CLASS_FAILURE, 
 
-    POST_TRAINER_CLASS_START, 
+    POST_TRAINER_CLASS_START,
     POST_TRAINER_CLASS_SUCCESS, 
     POST_TRAINER_CLASS_FAILURE, 
 
@@ -179,10 +179,10 @@ export default function reducers(state = initialState, action){
             }
         case DELETE_TRAINER_CLASS_SUCCESS:
             const deleteFromClasses = state.classes.filter(cls => {
-                if (cls.id === action.payload.id){
-                    return false;
-                }else {
-                    return true
+                if (cls.id !== action.payload){
+                    return true;
+                } else {
+                    return false
                 }
             })
 

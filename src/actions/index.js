@@ -1,6 +1,5 @@
 import axiosWithAuth from "../utils/axiosWithAuth"
 
-
 export const FETCH_CLASS_START = "FETCH_CLASS_START"
 export const FETCH_CLASS_SUCCESS = "FETCH_CLASS_SUCCESS"
 export const FETCH_CLASS_FAILURE = "FETCH_CLASS_FAILURE"
@@ -41,27 +40,30 @@ export const DELETE_TRAINER_CLASS_FAILURE = "DELETE_TRAINER_CLASS_FAILURE"
 //         })
 
 // }
-export const getTrainerClasses = (id) => dispatch => {
+export const getTrainerClasses = (user_id) => dispatch => {
     dispatch({ type: FETCH_TRAINER_CLASS_START });
 
-    axiosWithAuth().get(`api/users/${id}/instructors-classes`)
+    axiosWithAuth().get(`api/users/${user_id}/instructors-classes`)
         .then(res => {
             dispatch({ type: FETCH_TRAINER_CLASS_SUCCESS, payload: res.data });
         })
         .catch(err => {
-            dispatch({ type: FETCH_TRAINER_CLASS_FAILURE, payload: err.res.data.message })
+            dispatch({ type: FETCH_TRAINER_CLASS_FAILURE, payload: err.response.data.message })
         })
 }
 
-export const postTrainerClasses = (cls  ) => (dispatch) => {
+export const postTrainerClasses = (cls) => (dispatch) => {
     dispatch({ type: POST_TRAINER_CLASS_START });
 
-    axiosWithAuth().post('api/classes', {cls} )
+    console.log(cls)
+
+    axiosWithAuth().post('/api/classes', cls)
         .then(res => {
             dispatch({ type: POST_TRAINER_CLASS_SUCCESS, payload: res.data });
         })
         .catch(err => {
-            dispatch({ type: POST_TRAINER_CLASS_FAILURE, payload: err });
+            console.log(err.response)
+            dispatch({ type: POST_TRAINER_CLASS_FAILURE, payload: err.response.data.message });
         });
 };
 
@@ -70,26 +72,25 @@ export const putTrainerClasses = (cls, id) => dispatch => {
 
     dispatch ({ type: PUT_TRAINER_CLASS_START })
 
-    axiosWithAuth().put(`/api/classes`, {name: cls.name, type: cls.type, start_time: cls.start, durationHr: cls.duration, intensity_level: cls.intensity, location: cls.location, attendees_amt: cls.registered, max_class_size: cls.max})
-    .then(res => {
-        dispatch ({ type: PUT_TRAINER_CLASS_SUCCESS, payload: res.data })
-    })
-    .catch(err => {
-        dispatch ({ type: PUT_TRAINER_CLASS_FAILURE, payload: err.response.data.message })
-    })
+    axiosWithAuth().put(`/api/classes${id}`, {name: cls.name, type: cls.type, start_time: cls.start, durationHr: cls.duration, intensity_level: cls.intensity, location: cls.location, attendees_amt: cls.registered, max_class_size: cls.max})
+        .then(res => {
+            dispatch ({ type: PUT_TRAINER_CLASS_SUCCESS, payload: res.data })
+        })
+        .catch(err => {
+            dispatch ({ type: PUT_TRAINER_CLASS_FAILURE, payload: err.response.data.message })
+        })
 }
 
 export const deleteTrainerClass = (id) => dispatch => {
-
     dispatch ({ type: DELETE_TRAINER_CLASS_START })
 
-    axiosWithAuth().get(`/api/classes/${id}/instructors-classes`)
-    .then(res => {
-        dispatch({ type: DELETE_TRAINER_CLASS_SUCCESS, payload: id })
-    })
-    .catch(err => {
-        dispatch ({ type: DELETE_TRAINER_CLASS_FAILURE, payload: err.response.data.message })
-    })
+    axiosWithAuth().delete(`/api/classes/${id}`)
+        .then(res => {
+            dispatch({ type: DELETE_TRAINER_CLASS_SUCCESS, payload: id })
+        })
+        .catch(err => {
+            dispatch ({ type: DELETE_TRAINER_CLASS_FAILURE, payload: err.response.data.message })
+        })
 }
 
 

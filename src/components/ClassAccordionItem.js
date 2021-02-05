@@ -3,7 +3,6 @@ import React from 'react'
 import {
     Box,
     Flex,
-    Center,
     AccordionItem,
     AccordionButton,
     AccordionPanel,
@@ -29,17 +28,19 @@ function ClassAccordionItem(props) {
                     <Box width="120px">Registered Attendees: <strong>{props.data.attendees_amt}</strong></Box>
                     <Box width="120px">Maximum Size: <strong>{props.data.max_class_size}</strong></Box>
                 </Flex>
-                {props.onAttend &&
-                    <Center>
+                <Flex justifyContent="space-evenly" margin="0 auto" marginTop="8px" width="50%" maxWidth="300px">
+                    {props.onAttend &&
                         <Button onClick={props.onAttend}>Attend</Button>
-                    </Center>
-                }
+                    }
 
-                {props.onEdit &&
-                    <Center>
-                        <Button>Edit</Button>
-                    </Center>
-                }
+                    {props.onEdit &&
+                        <Button onClick={props.onEdit}>Edit</Button>
+                    }
+
+                    {props.onDelete &&
+                        <Button onClick={props.onDelete}>Delete</Button>
+                    }
+                </Flex>
             </AccordionPanel>
         </AccordionItem>
     )
