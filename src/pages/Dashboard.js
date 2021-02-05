@@ -31,17 +31,17 @@ function Dashboard(props) {
     return (
         <Box margin="0 auto" width="90%" paddingY="20px">
             <Heading fontSize="3xl" as="h2" textAlign="center">Dashboard</Heading>
-            <Box border="1px solid gainsboro" mt="20px" paddingY="10px">
+            <Box borderTop="1px solid gainsboro" mt="20px" paddingY="10px">
                 <Heading fontSize="2xl" as="h3" textAlign="center">All Classes</Heading>
                 <Accordion mt="8px">
                     {props.classes &&
                         props.classes.map(cls => {
-                            return <ClassAccordionItem key={cls.id} data={cls} onAttend={() => props.attendClass(cls.id, user.id)} />
+                            return <ClassAccordionItem key={cls.id} data={cls} onAttend={() => props.attendClass(user.id, cls)} />
                         })
                     }
                 </Accordion>
             </Box>
-            <Box border="1px solid gainsboro" mt="20px" paddingY="10px">
+            <Box borderTop="1px solid gainsboro" mt="20px" paddingY="10px">
                 <Heading fontSize="2xl" as="h3" textAlign="center">My Classes</Heading>
                 <Accordion mt="8px">
                     {props.user.classesAttending &&

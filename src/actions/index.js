@@ -38,16 +38,12 @@ export const fetchClasses = () => dispatch => {
         })
 }
 
-export const attendClass = (user_id, class_id) => dispatch => {
+export const attendClass = (user_id, cls) => dispatch => {
     dispatch({ type: ATTEND_CLASS_START });
 
-    axiosWithAuth().post(`/api/users/${user_id}/attend-class`, { class_id })
+    axiosWithAuth().post(`/api/users/${user_id}/attend-class`, { class_id: cls.id })
         .then(res => {
-            axiosWithAuth().get(`/api/classes/${class_id}`)
-                .then(res => {
-                    console.log(res.data)
-                    dispatch({ type: ATTEND_CLASS_SUCCESS, payload: res.data });
-                })
+            dispatch({ type: ATTEND_CLASS_SUCCESS, payload: cls });
         })
         .catch(err => {
             dispatch({ type: ATTEND_CLASS_FAILURE, payload: err.response.data.message })

@@ -51,6 +51,10 @@ export default function reducers(state = initialState, action){
         case ATTEND_CLASS_SUCCESS:
             return {
                 ...state,
+                user: {
+                    ...state.user,
+                    classesAttending: [ ...state.user.classesAttending, action.payload ]
+                },
                 fetching: false
             }
 
