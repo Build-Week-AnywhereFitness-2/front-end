@@ -117,30 +117,41 @@ const AddClass = (props) => {
     //     })
     // }
 
-    const getUserID = user => {
-        const token = localStorage.getItem("token")
+    // const getUserID = user => {
+    //     const token = localStorage.getItem("token")
 
-        axiosWithAuth().get("https://anywherefitness2.herokuapp.com/api/auth/whoami",
-        {headers: {Authorization: token}})
-        .then(res => {
-            console.log(res)
-        })
+    //     axios.get("https://anywherefitness2.herokuapp.com/api/auth/whoami",
+    //     {headers: {Authorization: token}})
+    //     .then(res => {
+    //         console.log(res)
+    //     })
 
-    }
+    // }
 
-    const get5Class = cls => {
-        const token = localStorage.getItem("token")
+    // const getTClass = () => {
+    //     const token = localStorage.getItem("token")
 
-        axiosWithAuth().get("https://anywherefitness2.herokuapp.com/api/classes",
-        {headers: {Authorization: token}})
-        .then(res => {
-            console.log(res)
-            // setClassValues(res.data)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }
+    //     axios.post("https://anywherefitness2.herokuapp.com/api/classes",
+    //     {
+    //         "name": "Walking",
+    //         "type":"1",
+    //         "start_time":"12:30",
+    //         "duration_hour":"1",
+    //         "intensity_level":"1",
+    //         "location":"Mount Rainier, WA",
+    //         "attendees_amt": "10",
+    //         "max_class_size": "100"
+    //     },
+    //     {headers: {Authorization: token}})
+    //     .then(res => {
+    //         console.log(res)
+             
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
+    //     })
+        
+    // }
 
     
     
@@ -152,6 +163,8 @@ const AddClass = (props) => {
                 <h2>Add A Class</h2>
             
             <br/>
+            {/* <span onClick={getUserID}>USERID</span>
+            <span onClick={getTClass}>data</span> */}
             <form  onSubmit={handleSubmit}>
                 <div className="form_inputs">
                     <input
@@ -182,7 +195,7 @@ const AddClass = (props) => {
                     name="start_time"
                     id="start_time"
                     value={classValues.start_time}
-                    placeholder="Start Time"
+                    placeholder="Time"
                     type="string date"
                     />
                     <br/>
