@@ -1,8 +1,6 @@
 import React, { Component, useEffect, useReducer, useState } from "react"
 import  reducers,{ initialState } from "../reducers/index"
-import AddClass from "../components/trainers/AddClass"
-import { getTrainerClasses, putTrainerClasses, deleteTrainerClass } from "../actions/index"
-import ClassDisplay from "../components/trainers/ClassDisplay"
+import { fetchClasses, deleteClientClass, fetchMyClasses } from "../actions/index"
 import styled from "styled-components";
 // import UpdateClass from "./UpdateClass"
 // import { deleteTrainerClass } from "../../actions/index"
@@ -41,12 +39,12 @@ function ClientPage (props) {
                 });
 
 
-                props.getTrainerClasses(res.data.id);
+                props.fetchMyClasses(res.data.id);
             })
     }, [])
 
-    function onClickDeleteTrainerClass(id) {
-        props.deleteTrainerClass(id);
+    function onClickDeleteClientClass(id) {
+        props.deleteClientClass(id);
     };
 
 
@@ -57,14 +55,20 @@ function ClientPage (props) {
         </div>
         <div>
         <main>
-            <AddClass dispatch={dispatch} />
+        <Accordion mt="8px">
+                    {props.classes &&
+                        props.classes.map(cls => {
+                            return <ClassAccordionItem key={cls.id} onDelete={() => props.deleteClientClass(cls.id)}  data={cls}  />
+                        })
+                    }
+                </Accordion>
         <Box margin="0 auto" width="90%" paddingY="20px">
-            <Heading fontSize="3xl" as="h2" textAlign="center">Your Classes</Heading>
+            <Heading fontSize="3xl" as="h2" textAlign="center">Availible Classes</Heading>
             <Box borderTop="1px solid gainsboro" mt="20px" paddingY="10px">
                 <Accordion mt="8px">
                     {props.classes &&
                         props.classes.map(cls => {
-                            return <ClassAccordionItem key={cls.id} onDelete={() => props.deleteTrainerClass(cls.id)} onEdit={() => {}} data={cls}  />
+                            return <ClassAccordionItem key={cls.id} onAttend={() => props.deleteClientClass(cls.id)}   data={cls}  />
                         })
                     }
                 </Accordion>
@@ -85,4 +89,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { getTrainerClasses, putTrainerClasses, deleteTrainerClass })(ClientPage)
+export default connect(mapStateToProps, { fetchMyClasses, deleteClientClass })(ClientPage)
