@@ -43,14 +43,11 @@ export const getTrainerClasses = (user_id) => dispatch => {
 export const postTrainerClasses = (cls) => (dispatch) => {
     dispatch({ type: POST_TRAINER_CLASS_START });
 
-    console.log(cls)
-
     axiosWithAuth().post('/api/classes', cls)
         .then(res => {
             dispatch({ type: POST_TRAINER_CLASS_SUCCESS, payload: res.data });
         })
         .catch(err => {
-            console.log(err.response)
             dispatch({ type: POST_TRAINER_CLASS_FAILURE, payload: err.response.data.message });
         });
 };
@@ -110,7 +107,7 @@ export const fetchMyClasses = (user_id) => dispatch => {
 
     axiosWithAuth().get(`/api/users/${user_id}/clients-classes`)
         .then(res => {
-            console.log(res.data)
+
             dispatch({ type: FETCH_MY_CLASSES_SUCCESS, payload: res.data });
         })
         .catch(err => {

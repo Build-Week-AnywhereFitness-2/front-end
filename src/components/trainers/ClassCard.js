@@ -71,7 +71,7 @@ function type (num)  {
 }
 
 function ClassCard (props) {
-    console.log(props.data)
+
 
     return(
         <ClassCardStyle>

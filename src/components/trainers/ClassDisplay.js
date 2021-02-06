@@ -6,7 +6,7 @@ import ClassCard from "./ClassCard"
 
 
 const ClassDisplay = (props) => {
-    console.log(props.data)
+
 
 
     return (

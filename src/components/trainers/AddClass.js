@@ -94,7 +94,7 @@ const AddClass = (props) => {
                 ...user,
                 ...res.data
             });
-            console.log(res.data)
+
 
             props.postTrainerClasses(classValues);
             setClassValues(newClassData)
