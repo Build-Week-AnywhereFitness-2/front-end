@@ -1,9 +1,7 @@
 import React, { Component, useEffect, useReducer, useState } from "react"
 import  reducers,{ initialState } from "../reducers/index"
-import { fetchClasses, deleteClientClass, fetchMyClasses } from "../actions/index"
+import { attendClass, deleteClientClass, fetchMyClasses, fetchClasses } from "../actions/index"
 import styled from "styled-components";
-// import UpdateClass from "./UpdateClass"
-// import { deleteTrainerClass } from "../../actions/index"
 import {connect} from "react-redux"
 import axiosWithAuth from "../utils/axiosWithAuth"
 import ClassAccordionItem from "../components/ClassAccordionItem"
@@ -68,7 +66,7 @@ function ClientPage (props) {
                 <Accordion mt="8px">
                     {props.classes &&
                         props.classes.map(cls => {
-                            return <ClassAccordionItem key={cls.id} onAttend={() => props.deleteClientClass(cls.id)}   data={cls}  />
+                            return <ClassAccordionItem key={cls.id} onAttend={() => props.attendClass(cls.id)}   data={cls}  />
                         })
                     }
                 </Accordion>

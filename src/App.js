@@ -1,8 +1,9 @@
 import './App.css';
 import { Route, Switch } from "react-router-dom";
 import PrivateRoute from './utils/PrivateRoute';
-
 import { connect } from 'react-redux';
+//axios is being used to render either client or trainer view
+import axiosWithAuth from "./utils/axiosWithAuth"
 
 import Nav from './components/Nav';
 
@@ -15,6 +16,7 @@ import Dashboard from './pages/Dashboard';
 import fetchToken from './utils/fetchToken';
 import TrainerPage from "./pages/TrainerPage"
 import ClientPage from "./pages/ClientPage"
+import { useEffect, useState } from 'react';
 
 function App(props) {
 
