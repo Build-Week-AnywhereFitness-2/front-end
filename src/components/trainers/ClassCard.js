@@ -87,10 +87,6 @@ function ClassCard (props) {
                 <p>Max Size: {props.data.max_class_size}</p>
             </div>
             <div className="buttons">
-            {/* <Route exact path="/updateclass">
-                    <UpdateClass />
-            
-            </Route> */}
             <Link to="/updateclass/:id">
                 <button>
                     Update

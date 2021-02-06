@@ -2,9 +2,6 @@ import React, { useState } from "react"
 import { connect } from "react-redux"
 import { postTrainerClasses } from "../../actions/index"
 import styled from "styled-components";
-// import axiosWithAuth from "../../utils/axiosWithAuth"
-import axios from "axios"
-import fetchToken from "../../utils/fetchToken"
 import axiosWithAuth from "../../utils/axiosWithAuth";
 
 
@@ -225,7 +222,6 @@ const mapStateToProps = state => {
     }
 }
 
-// const mapDispatchToProps = {postTrainerClasses}
 
 export default connect(mapStateToProps , { postTrainerClasses })(AddClass)
 

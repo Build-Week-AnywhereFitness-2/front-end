@@ -28,18 +28,6 @@ export const DELETE_TRAINER_CLASS_START = "DELETE_TRAINER_CLASS_START"
 export const DELETE_TRAINER_CLASS_SUCCESS = "DELETE_TRAINER_CLASS_SUCCESS"
 export const DELETE_TRAINER_CLASS_FAILURE = "DELETE_TRAINER_CLASS_FAILURE"
 
-// export const getTrainerClasses = (id) => dispatch => {
-//     dispatch({ type: FETCH_TRAINER_CLASS_START })
-
-//     axiosWithAuth().get(`/api/users/5/instructors-classes`)
-//         .then(res => {
-//             dispatch({ type: FETCH_TRAINER_CLASS_SUCCESS, payload: res.data })
-//         })
-//         .catch(err => {
-//             dispatch ({ type: FETCH_TRAINER_CLASS_FAILURE, payload: err.response.data.message })
-//         })
-
-// }
 export const getTrainerClasses = (user_id) => dispatch => {
     dispatch({ type: FETCH_TRAINER_CLASS_START });
 
@@ -92,20 +80,6 @@ export const deleteTrainerClass = (id) => dispatch => {
             dispatch ({ type: DELETE_TRAINER_CLASS_FAILURE, payload: err.response.data.message })
         })
 }
-
-
-
-// export const fetchUserData = () => dispatch => {
-//     dispatch({ type: FETCH_USER_START });
-
-//     axiosWithAuth().get('/api/auth/whoami')
-//         .then(res => {
-//             dispatch({ type: FETCH_USER_SUCCESS, payload: res.data });
-//         })
-//         .catch(err => {
-//             dispatch({ type: FETCH_USER_FAILURE, payload: err.response.data.message });
-//         })
-// }
 
 export const fetchClasses = () => dispatch => {
     dispatch({ type: FETCH_CLASS_START });
