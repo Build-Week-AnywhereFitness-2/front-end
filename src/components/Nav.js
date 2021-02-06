@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link, useHistory } from "react-router-dom"
 import styled from "styled-components";
 
@@ -34,11 +34,13 @@ export const StyledLinks = styled.div`
 
 function Nav() {
   //for conditional redering
-  let navRole;
+  const [isInts, setIsInts] = useState(false);
     useEffect(() => {
       axiosWithAuth().get('/api/auth/whoami')
           .then(res => {
-             navRole = res.data.role;      
+             if (res.data.role === 2) {
+               setIsInts(true);
+             } 
           })
   }, [])
     const history = useHistory();
@@ -54,7 +56,7 @@ function Nav() {
             <div className="ui menu" >
                 <h1>🏋️‍♀️ ANYWHERE FITNESS 🏋️‍♀️</h1>
                 <Link className="link" to="/">Dashboard</Link>
-                <Link>{ navRole ? <Link className="link" to="/trainerpage">Trainers</Link>  :  <Link className="link" to="/clientpage">Clients</Link>} </Link>
+                <Link>{ isInts ? <Link className="link" to="/trainerpage">Trainers</Link>  :  <Link className="link" to="/clientpage">Clients</Link>} </Link>
                 <Link className="link" onClick={onLogout}>Logout</Link>
             </div>
         </StyledLinks>
