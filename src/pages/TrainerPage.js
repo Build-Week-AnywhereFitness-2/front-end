@@ -39,7 +39,7 @@ function TrainerPage (props) {
                     ...user,
                     ...res.data
                 });
-                console.log(res.data.id)
+
 
                 props.getTrainerClasses(res.data.id);
             })

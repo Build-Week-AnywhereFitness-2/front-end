@@ -2,9 +2,6 @@ import React, { useState } from "react"
 import { connect } from "react-redux"
 import { postTrainerClasses } from "../../actions/index"
 import styled from "styled-components";
-// import axiosWithAuth from "../../utils/axiosWithAuth"
-import axios from "axios"
-import fetchToken from "../../utils/fetchToken"
 import axiosWithAuth from "../../utils/axiosWithAuth";
 
 
@@ -45,6 +42,7 @@ input {
     margin: 0.5% 10px;
     box-sizing: border-box;
     text-align: center;
+    color: black;
 
   }
 
@@ -75,14 +73,14 @@ h2{
 const AddClass = (props) => {
 
     const newClassData = {
-        name: "Nature Walk",
-        type: 1,
-        start_time:"15:30",
-        duration_hour: 1,
-        intensity_level: 1,
-        location:"Mount Rainier, WA",
-        attendees_amt: 0,
-        max_class_size: 100
+        name: "",
+        type: "",
+        start_time:"",
+        duration_hour: "",
+        intensity_level: "",
+        location:"",
+        attendees_amt: "",
+        max_class_size: ""
     }
 
     const [classValues, setClassValues] = useState(newClassData)
@@ -96,12 +94,12 @@ const AddClass = (props) => {
                 ...user,
                 ...res.data
             });
-            console.log(res.data)
+
 
             props.postTrainerClasses(classValues);
+            setClassValues(newClassData)
         })
 
-    // props.postTrainerClasses();
     }
 
     function handleChange (e) {
@@ -109,44 +107,6 @@ const AddClass = (props) => {
             ...classValues,
             [e.target.name]: e.target.value
         })
-    }
-
-    // useEffect(() => {
-    //     axiosWithAuth().get('/api/auth/whoami')
-    //         .then(res => {
-    //             setUser({
-    //                 ...user,
-    //                 ...res.data
-    //             });
-    //             console.log(res.data.id)
-              
-    //             props.getTrainerClasses(res.data.id);
-    //         })
-
-    //     props.getTrainerClasses();
-    // }, [])
-
-    // const token = fetchToken();
-    // console.log(token)
-
-    const userID = () => {
-        const token = localStorage.getItem("token");
-    
-        return axios.create({
-            baseURL: "https://anywherefitness2.herokuapp.com/api/auth/whoami",
-            headers: {Authorization: token}
-        })
-    }
-
-    const getUserID = user => {
-        const token = localStorage.getItem("token")
-
-        axios.get("https://anywherefitness2.herokuapp.com/api/auth/whoami",
-        {headers: {Authorization: token}})
-        .then(res => {
-            console.log(res)
-        })
-
     }
 
     return (
@@ -262,7 +222,6 @@ const mapStateToProps = state => {
     }
 }
 
-// const mapDispatchToProps = {postTrainerClasses}
 
 export default connect(mapStateToProps , { postTrainerClasses })(AddClass)
 

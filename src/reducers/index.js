@@ -114,7 +114,6 @@ export default function reducers(state = initialState, action){
             return {
                 ...state,
                 classes: action.payload,
-                user: {...state.user },
 
                 fetching: false
             }

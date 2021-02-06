@@ -1,12 +1,12 @@
 
-import React, { useEffect } from "react"
+import React from "react"
 import { connect } from "react-redux"
 import { getTrainerClasses } from "../../actions/index" 
 import ClassCard from "./ClassCard"
 
 
 const ClassDisplay = (props) => {
-    console.log(props.data)
+
 
 
     return (

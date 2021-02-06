@@ -15,7 +15,7 @@ function ClassAccordionItem(props) {
         <AccordionItem>
             <AccordionButton>
                 <Box flex="1" textAlign="left">
-                    {props.data.name}
+                    {props.data.name}{props.data.class_name}
                 </Box>
                 <AccordionIcon />
             </AccordionButton>
