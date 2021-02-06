@@ -17,14 +17,12 @@ import {
 } from '@chakra-ui/react';
 
 const TrainerPageStyle = styled.div `
-
 .trainer_main{
     font-size: 5rem;
     text-align: center;
     text-decoration: underline;
     margin: 3% 0;
 }
-
 `
 
 function TrainerPage (props) {
@@ -64,7 +62,7 @@ function TrainerPage (props) {
                 <Accordion mt="8px">
                     {props.classes &&
                         props.classes.map(cls => {
-                            return <ClassAccordionItem key={cls.id} onDelete={() => props.deleteTrainerClass(cls.id)} onEdit={() => {}} data={cls}  />
+                            return <ClassAccordionItem key={cls.id} onDelete={() => props.deleteTrainerClass(cls.id)} onEdit={() => props.deleteTrainerClass(cls.id)} data={cls}  />
                         })
                     }
                 </Accordion>

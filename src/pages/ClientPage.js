@@ -71,7 +71,7 @@ function ClientPage(props) {
                         <Menu>
                             <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
                                 Search By
-                            </MenuButton>
+                        </MenuButton>
                             <MenuList>
                                 <MenuItem>Class Time</MenuItem>
                                 <MenuItem>Class Date</MenuItem>
@@ -85,8 +85,7 @@ function ClientPage(props) {
                             <Accordion mt="8px">
                                 {props.classes &&
                                     props.classes.map(cls => {
-                                        return 
-                                        <ClassAccordionItem key={cls.id} onAttend={() => props.attendClass(cls.id)} data={cls} />
+                                        return <ClassAccordionItem key={cls.id} onAttend={() => props.attendClass(cls.id)} data={cls} />
                                     })
                                 }
                             </Accordion>
