@@ -36,7 +36,7 @@ function Dashboard(props) {
                 <Accordion mt="8px">
                     {props.classes &&
                         props.classes.map(cls => {
-                            return <ClassAccordionItem key={cls.id} data={cls} onAttend={() => props.attendClass(user.id, cls)}  />
+                            return <ClassAccordionItem key={cls.id} data={cls} onAttend={() => props.attendClass(user.id, cls)} />
                         })
                     }
                 </Accordion>

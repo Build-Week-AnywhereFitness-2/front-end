@@ -137,7 +137,7 @@ export const deleteClientClass = (id) => dispatch => {
         })
 }
 
-export const editClass = (user_id) => dispatch => {
+export const editClass = (id) => dispatch => {
     dispatch({ type: EDIT_CLASS_START });
 
     axiosWithAuth().delete(`/api/classes/${id}`)

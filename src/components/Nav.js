@@ -59,6 +59,7 @@ function Nav() {
                 <h1>🏋️‍♀️ ANYWHERE FITNESS 🏋️‍♀️</h1>
                 <Link className="link" to="/">Dashboard</Link>
                 <Link>{ isInts ? <Link className="link" to="/trainerpage">Trainers</Link>  :  <Link className="link" to="/clientpage">Clients</Link>} </Link>
+                <Link>{ isInts ? <Link className="link" to="/editpage">Edit Class</Link>  :  {}} </Link>
                 <Link className="link" onClick={onLogout}>Logout</Link>
             </div>
         </StyledLinks>
