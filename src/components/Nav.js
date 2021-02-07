@@ -1,6 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link, useHistory } from "react-router-dom"
 import styled from "styled-components";
+
+//for conditional rendering
+import axiosWithAuth from "../utils/axiosWithAuth"
+
 
 export const StyledLinks = styled.div`
     font-family: Helvetica, sans-serif;
@@ -29,6 +33,18 @@ export const StyledLinks = styled.div`
 `;
 
 function Nav() {
+
+    //for conditional redering
+    const [isInts, setIsInts] = useState(false);
+    useEffect(() => {
+      axiosWithAuth().get('/api/auth/whoami')
+          .then(res => {
+             if (res.data.role === 2) {
+               setIsInts(true);
+             } 
+          })
+  }, [])
+
     const history = useHistory();
 
     const onLogout = () => {
@@ -42,8 +58,7 @@ function Nav() {
             <div className="ui menu" >
                 <h1>🏋️‍♀️ ANYWHERE FITNESS 🏋️‍♀️</h1>
                 <Link className="link" to="/">Dashboard</Link>
-                <Link className="link" to="/trainerpage">Trainers</Link>
-                <Link className="link" to="/clientpage">Clients</Link>
+                <Link>{ isInts ? <Link className="link" to="/trainerpage">Trainers</Link>  :  <Link className="link" to="/clientpage">Clients</Link>} </Link>
                 <Link className="link" onClick={onLogout}>Logout</Link>
             </div>
         </StyledLinks>
