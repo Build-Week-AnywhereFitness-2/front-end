@@ -32,11 +32,6 @@ function ClassAccordionItem(props) {
                     {props.onAttend &&
                         <Button onClick={props.onAttend}>Attend</Button>
                     }
-
-                    {props.onEdit &&
-                        <Button onClick={props.onEdit}>Edit</Button>
-                    }
-
                     {props.onDelete &&
                         <Button onClick={props.onDelete}>Delete</Button>
                     }

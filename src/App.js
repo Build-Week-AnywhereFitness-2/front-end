@@ -40,7 +40,7 @@ function App(props) {
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/trainerpage" component={TrainerPage} />
           <Route exact path="/clientpage" component={ClientPage} />
-          <Route exact path="/editpage" component={EditPage} />
+
 
           <PrivateRoute exact path="/" component={Dashboard} />
         </Switch>
@@ -55,5 +55,5 @@ function mapStateToProps(state) {
   }
 }
 
-
+//<Route exact path="/editpage" component={EditPage} />
 export default connect(mapStateToProps, null)(App)
