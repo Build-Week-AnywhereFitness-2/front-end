@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchClasses, attendClass, fetchMyClasses } from '../actions/index';
+import { fetchClasses, attendClass, fetchMyClasses, putTrainerClasses } from '../actions/index';
 
 import {
     Box,
@@ -36,7 +36,7 @@ function Dashboard(props) {
                 <Accordion mt="8px">
                     {props.classes &&
                         props.classes.map(cls => {
-                            return <ClassAccordionItem key={cls.id} data={cls} onAttend={() => props.attendClass(user.id, cls)} />
+                            return <ClassAccordionItem key={cls.id} data={cls} onAttend={() => props.attendClass(user.id, cls)} onEdit={() => putTrainerClasses} />
                         })
                     }
                 </Accordion>
