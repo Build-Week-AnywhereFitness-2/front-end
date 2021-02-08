@@ -13,7 +13,10 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import fetchToken from './utils/fetchToken';
-import TrainerPage from "./pages/TrainerPage"
+import TrainerPage from "./pages/TrainerPage";
+import ClientPage from "./pages/ClientPage"
+import EditPage from "./pages/EditPage"
+
 
 function App(props) {
 
@@ -36,6 +39,8 @@ function App(props) {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/trainerpage" component={TrainerPage} />
+          <Route exact path="/clientpage" component={ClientPage} />
+          <Route exact path="/editpage" component={EditPage} />
 
           <PrivateRoute exact path="/" component={Dashboard} />
         </Switch>

@@ -28,6 +28,16 @@ export const DELETE_TRAINER_CLASS_START = "DELETE_TRAINER_CLASS_START"
 export const DELETE_TRAINER_CLASS_SUCCESS = "DELETE_TRAINER_CLASS_SUCCESS"
 export const DELETE_TRAINER_CLASS_FAILURE = "DELETE_TRAINER_CLASS_FAILURE"
 
+export const DELETE_CLIENT_CLASS_START = "DELETE_CLIENT_CLASS_START"
+export const DELETE_CLIENT_CLASS_SUCCESS = "DELETE_CLIENT_CLASS_SUCCESS"
+export const DELETE_CLIENT_CLASS_FAILURE = "DELETE_CLIENT_CLASS_FAILURE"
+
+export const EDIT_CLASS_START = "EDIT_CLASS_START"
+export const EDIT_CLASS_SUCCESS = "EDIT_CLASS_SUCCESS"
+export const EDIT_CLASS_FAILURE = "EDIT_CLASS_FAILURE"
+
+
+
 export const getTrainerClasses = (user_id) => dispatch => {
     dispatch({ type: FETCH_TRAINER_CLASS_START });
 
@@ -112,5 +122,29 @@ export const fetchMyClasses = (user_id) => dispatch => {
         })
         .catch(err => {
             dispatch({ type: FETCH_MY_CLASSES_FAILURE, payload: err.response.data.message })
+        })
+}
+
+export const deleteClientClass = (id) => dispatch => {
+    dispatch ({ type: DELETE_CLIENT_CLASS_START })
+
+    axiosWithAuth().delete(`/api/classes/${id}`)
+        .then(res => {
+            dispatch({ type: DELETE_CLIENT_CLASS_SUCCESS, payload: id })
+        })
+        .catch(err => {
+            dispatch ({ type: DELETE_CLIENT_CLASS_FAILURE, payload: err.response.data.message })
+        })
+}
+
+export const editClass = (id) => dispatch => {
+    dispatch({ type: EDIT_CLASS_START });
+
+    axiosWithAuth().delete(`/api/classes/${id}`)
+        .then(res => {
+            dispatch({ type: EDIT_CLASS_SUCCESS, payload: id })
+        })
+        .catch(err => {
+            dispatch ({ type: EDIT_CLASS_FAILURE, payload: err.response.data.message })
         })
 }
